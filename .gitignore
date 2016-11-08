@@ -1,3 +1,4 @@
 build
 node_modules
+mongo_data
 *.log
