@@ -8,14 +8,16 @@ var UserSchema = new mongoose.Schema({
     questionOrder: [{
        questionId: {
            type:String,
-            // type: mongoose.Schema.Types.ObjectId,
-            // ref: 'Questions',
             required: true
        },
-       weight:{ 
+       weight: { 
            type: Number,
            required: true
        }
+    }],
+    results: [{
+           type: Number,
+           required: true
     }]
 });
 

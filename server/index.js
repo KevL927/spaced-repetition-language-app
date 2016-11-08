@@ -1,10 +1,13 @@
-
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+
 var User = require('./models/user');
 var Questions = require('./models/question'); 
-var jsonParser = bodyParser.json();
+var sortQuestion = require('./set-question-order/sort_by_space_repetition');
+var questionFactory = require('./set-question-order/question_factory');
+
 var HOST = process.env.HOST;
 var PORT = process.env.PORT || 8080;
 mongoose.Promise= global.Promise;
@@ -66,14 +69,15 @@ app.get('/getUsers', function(req, res){
 
 app.post('/createUser', function(req, res) {
     var newUser = new User({
-        userGoogleToken:'564564545623',
-        questionOrder:[{questionId:'driogj',weight:1},{questionId:'drweiogj',weight:2},{questionId:'drieeogj',weight:1}]
+        userGoogleToken: '564564545623',
+        questionOrder: questionFactory(),
+        results: []
     });
     newUser.save(function(err, user) {
         if (err) return errorHandler(res);
             return res.status(201).json({});
-    })
-})
+    });
+});
 
 app.post('/app/v1/question', function(req, res){
     
@@ -89,7 +93,8 @@ app.post('/app/v1/question', function(req, res){
     
     function updateQuestionOrder(questionJSON){
         User.findByIdAndUpdate(user_ID,{
-            questionOrder: [{questionId:'5820fb638ba76026b9bf8b8d',weight:1},{questionId:'5820fdc8b1fa4826e6d8b8b8',weight:1},{questionId:'5820fe1395cf5026fe3dbfca',weight:1}]
+            questionOrder: [{questionId:'5820fb638ba76026b9bf8b8d',weight:1},{questionId:'5820fdc8b1fa4826e6d8b8b8',weight:1},{questionId:'5820fe1395cf5026fe3dbfca',weight:1}],
+            result: [20,23,43]
         },function(err, userJSON){
             if (err) return errorHandler(res);
             return res.json(questionJSON);
@@ -98,6 +103,7 @@ app.post('/app/v1/question', function(req, res){
    
    
 });
+
 
 
 function  errorHandler(res){
