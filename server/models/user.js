@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-    userId: {
+    userGoogleToken: {
         type: String,
         required: true
     },
-    record: {
+    questionOrder: {
         type: Array,
         required: true
     }
