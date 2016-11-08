@@ -1,11 +1,17 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var createStore = require('redux').createStore;
+var redux = require('redux');
+var createStore = redux.createStore;
+var applyMiddleware = redux.applyMiddleware;
 var Provider = require('react-redux').Provider;
+var thunk = require('redux-thunk').default;
 
-var reducers = require('./reducers/index');
+var actions = require('./actions/actions');
+var reducers = require('./reducers/reducers').frenchXReducer;
 
-var store = createStore(reducers.languageQuestionReducer);
+var App = require('./components/App');
+
+var store = createStore(reducers, applyMiddleware(thunk));
 
 document.addEventListener('DOMContentLoaded', function() {
     ReactDOM.render(
@@ -18,4 +24,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 console.log(`Client running in ${process.env.NODE_ENV} mode`);
 
-module.exports.store = store;
+exports.store = store;
