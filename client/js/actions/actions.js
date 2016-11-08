@@ -1,5 +1,13 @@
 var fetch = require('isomorphic-fetch');
 
+var CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION';
+function checkAuthentication() {
+    return {
+        type: CHECK_AUTHENTICATION,
+        payload: authenticatedStatus
+    }
+}
+
 var FETCH_QUESTION_SUCCESS = 'FETCH_QUESTION_SUCCESS';
 function fetchQuestionSuccess(question) {
     return {
@@ -43,7 +51,7 @@ function postQuestionAnsweredStatus () {
     return function(dispatch) {
         return fetch('/...').then(function(res, err) {
             if (err) {
-                return dispatch(postQuestionAnsweredStatus(err));
+                return dispatch(postQuestionAnsweredStatusError(err));
             }
             return res.json();
         }).then(function(response) {
@@ -53,17 +61,11 @@ function postQuestionAnsweredStatus () {
     };
 }
 
-exports.FETCH_QUESTION = FETCH_QUESTION;
-exports.fetchQuestion = fetchQuestion;
-
 exports.FETCH_QUESTION_SUCCESS = FETCH_QUESTION_SUCCESS;
 exports.fetchQuestionSuccess = fetchQuestionSuccess;
 
 exports.FETCH_QUESTION_ERROR = FETCH_QUESTION_ERROR;
 exports.fetchQuestionError = fetchQuestionError;
 
-exports.POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
-exports.postQuestionAnsweredStatus = postQuestionAnsweredStatus;
-
-exports.POST_QUESTION_ANSWERED_STATUS_ERROR = "POST_QUESTION_ANSWERED_STATUS_ERROR";
+exports.POST_QUESTION_ANSWERED_STATUS_ERROR = POST_QUESTION_ANSWERED_STATUS_ERROR;
 exports.postQuestionAnsweredStatusError = postQuestionAnsweredStatusError;
