@@ -11,6 +11,6 @@ var QuestionSchema = new mongoose.Schema({
     }
 });
 
-var Question = mongoose.model('Question', QuestionSchema);
+var Questions = mongoose.model('Questions', QuestionSchema);
 
-module.exports = Question;
+module.exports = Questions;

@@ -1,29 +1,122 @@
-import 'babel-polyfill';
-import express from 'express';
+//var * as server = ( './server/index';
+//var * as client = ( './client/index';
+var express = require('express');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var User = require('./models/user');
+var Questions = require('./models/question'); 
+var jsonParser = bodyParser.json();
+var HOST = process.env.HOST;
+var PORT = process.env.PORT || 8080;
+mongoose.Promise= global.Promise;
 
-const HOST = process.env.HOST;
-const PORT = process.env.PORT || 8080;
 
 console.log(`Server running in ${process.env.NODE_ENV} mode`);
 
-const app = express();
+var app = express();
+exports.app = app;
 
 app.use(express.static(process.env.CLIENT_PATH));
+app.use(jsonParser);
 
-function runServer() {
-    return new Promise((resolve, reject) => {
-        app.listen(PORT, HOST, (err) => {
-            if (err) {
-                console.error(err);
-                reject(err);
-            }
-
-            const host = HOST || 'localhost';
-            console.log(`Listening on ${host}:${PORT}`);
+var runServer = function(callback) {
+    var databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/frenchX';
+    mongoose
+        .connect(databaseUri)
+        .then(function() {
+            console.log('db connected...');
+            var port = process.env.PORT || 8080;
+            var server = app.listen(port, function() {
+                console.log('Listening on localhost:' + port);
+                if (callback) {
+                    callback(server);
+                    console.log('server running');
+                }
+            })
+        .catch(function(err){
+            console.log(err); 
         });
     });
-}
+};
 
 if (require.main === module) {
     runServer();
 }
+
+// app.get('/question', function(req, res){
+//     var questionId = '5820fb638ba76026b9bf8b8d';
+//     Questions.findOne({_id:questionId}, function(err, question){
+//         if (err) return errorHandler(res);
+//         return res.json(question);
+//     });
+// });
+
+app.get('/question', function(req, res){
+    var questionId = '5820fb638ba76026b9bf8b8d';
+    Questions.find({}, function(err, question){
+        if (err) return errorHandler(res);
+        return res.json(question);
+    });
+});
+app.get('/getUsers', function(req, res){
+    User.find({}, function(err, users){
+        if (err) return errorHandler(res);
+        return res.json(users);
+    });
+});
+
+app.post('/createUser', function(req, res) {
+    var newUser = new User({
+        userGoogleToken:'5645645456',
+        questionOrder:[1,2,3,4]
+    });
+    newUser.save(function(err, user) {
+        if (err) return errorHandler(res);
+            return res.status(201).json({});
+    })
+})
+
+app.post('/app/v1/question', function(req, res){
+    
+
+      var user_ID = '58211f787b94a534119bb350';    //_id
+       
+    var questionId = '5821184c6c359132fe18f6ba';
+    Questions.findOne({_id:questionId}, function(err, questionJSON){
+        if (err) return errorHandler(res);
+        // return res.json(questionJSON);
+      return updateQuestionOrder(questionJSON);
+    });
+    
+    function updateQuestionOrder(questionJSON){
+        User.findByIdAndUpdate(user_ID,{
+            questionOrder: ['78910']
+        },function(err, userJSON){
+            if (err) return errorHandler(res);
+            return res.json(questionJSON);
+        });
+    }
+   
+   
+});
+
+
+
+
+
+
+
+
+
+
+
+
+function  errorHandler(res){
+   return res.status(500).json({
+        message: 'Internal Server Error'
+    });
+}
+// export {
+//     server,
+//     client
+// };
