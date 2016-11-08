@@ -1,5 +1,4 @@
-//var * as server = ( './server/index';
-//var * as client = ( './client/index';
+
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -67,8 +66,8 @@ app.get('/getUsers', function(req, res){
 
 app.post('/createUser', function(req, res) {
     var newUser = new User({
-        userGoogleToken:'5645645456',
-        questionOrder:[1,2,3,4]
+        userGoogleToken:'564564545623',
+        questionOrder:[{questionId:'driogj',weight:1},{questionId:'drweiogj',weight:2},{questionId:'drieeogj',weight:1}]
     });
     newUser.save(function(err, user) {
         if (err) return errorHandler(res);
@@ -90,7 +89,7 @@ app.post('/app/v1/question', function(req, res){
     
     function updateQuestionOrder(questionJSON){
         User.findByIdAndUpdate(user_ID,{
-            questionOrder: ['78910']
+            questionOrder: [{questionId:'5820fb638ba76026b9bf8b8d',weight:1},{questionId:'5820fdc8b1fa4826e6d8b8b8',weight:1},{questionId:'5820fe1395cf5026fe3dbfca',weight:1}]
         },function(err, userJSON){
             if (err) return errorHandler(res);
             return res.json(questionJSON);
@@ -101,22 +100,8 @@ app.post('/app/v1/question', function(req, res){
 });
 
 
-
-
-
-
-
-
-
-
-
-
 function  errorHandler(res){
    return res.status(500).json({
         message: 'Internal Server Error'
     });
 }
-// export {
-//     server,
-//     client
-// };

@@ -5,10 +5,18 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    questionOrder: {
-        type: Array,
-        required: true
-    }
+    questionOrder: [{
+       questionId: {
+           type:String,
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'Questions',
+            required: true
+       },
+       weight:{ 
+           type: Number,
+           required: true
+       }
+    }]
 });
 
 var User = mongoose.model('User', UserSchema);
