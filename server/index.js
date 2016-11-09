@@ -2,11 +2,14 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
+var passport = require('passport');
+var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 
 var User = require('./models/user');
 var Questions = require('./models/question'); 
 var sortQuestion = require('./set-question-order/sort_by_space_repetition');
 var questionFactory = require('./set-question-order/question_factory');
+var clientIDs = require("./config/client_secret");
 
 var HOST = process.env.HOST;
 var PORT = process.env.PORT || 8080;
@@ -20,6 +23,8 @@ exports.app = app;
 
 app.use(express.static(process.env.CLIENT_PATH));
 app.use(jsonParser);
+app.use(passport.initialize()); 
+app.use(passport.session());
 
 var runServer = function(callback) {
     var databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/frenchX';
@@ -44,7 +49,64 @@ var runServer = function(callback) {
 if (require.main === module) {
     runServer();
 }
-//create new user
+
+// used to serialize the user for the session
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
+    
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        User.findById(id, function(err, user) {
+            done(err, user);
+        });
+    });
+
+passport.use(new GoogleStrategy({
+    clientID:     clientIDs.google.client_id,
+    clientSecret: clientIDs.google.client_secret,
+    callbackURL: clientIDs.google.callbackURL,
+    passReqToCallback   : true
+  },
+  function( request, accessToken, refreshToken, profile, done) {
+      //console.log(profile);
+       
+            User.findOne({ userGoogleToken: profile.id }, function (err, user) {
+                if(err){
+                    errorHandler(user);
+                }
+               if (user) {
+                   console.log('user exists '+user._id);
+                   return done(null, user);
+                } else {
+                    var newUser = new User({
+                                        userGoogleToken: profile.id,
+                                        questionOrder: questionFactory(),
+                                        results: [0]
+                                  });
+                newUser.save(function(err, res) {
+                    if (err) return errorHandler(err);
+                    console.log('user does not exist '+res._id);
+                       return done(null, newUser);
+                });
+                }
+            
+            });
+          
+}
+));
+
+app.get('/auth/google',
+ passport.authenticate('google', { scope: [
+   'https://www.googleapis.com/auth/plus.login',
+   'https://www.googleapis.com/auth/plus.profile.emails.read'
+ ] }
+));
+app.get( '/auth/google/callback', 
+   passport.authenticate( 'google', { 
+       successRedirect: '/',
+       failureRedirect: '/auth/google/failure'
+}));
 
 app.post('/createUser', function(req, res) {
     var newUser = new User({

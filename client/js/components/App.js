@@ -7,7 +7,7 @@ var App = React.createClass({
             <div className="welcome-page">
                 <h1>FrenchX</h1><br/>
                 <h3>Learn Languages Through Spaced Repetition</h3><br/>
-                <input type="button" value="Register/Login"></input>
+                 <a className="googleSignIn" href="/auth/google">Login with Google</a>
             </div>
         );
     }
