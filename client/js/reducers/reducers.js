@@ -16,7 +16,7 @@ var initialState = {
     result: []
 }
 
-
+ 
 var frenchXReducer = function (state, action) {
     var newState;
     
