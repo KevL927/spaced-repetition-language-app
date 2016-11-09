@@ -48,20 +48,19 @@ if (require.main === module) {
 
 app.post('/createUser', function(req, res) {
     var newUser = new User({
-        userGoogleToken: 'surbhi112.poswalia@gmail.com',
+        userGoogleToken: 'mariosuncle@gmail.com',
         questionOrder: questionFactory(),
         results: [0]
     });
     newUser.save(function(err, user) {
         if (err) return errorHandler(res);
-            return res.status(201).json({});
+            return res.status(201).json(user._id);
     });
 });
 
 //get first question displayed, everytime user logs in
 app.get('/question/:currentUserId', function(req, res){
     var currentUserId = req.params.currentUserId; 
-    
      User.findOne({_id:currentUserId}, function(err, user){
          if (err) return errorHandler(res);
          console.log(user);
@@ -113,7 +112,7 @@ app.post('/app/v1/question', function(req, res){
 
 
 function  errorHandler(res){
-   return res.status(500).json({
+   return res.status(401).json({
         message: 'Internal Server Error'
     });
 }
