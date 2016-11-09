@@ -8,6 +8,8 @@ function checkAuthentication(authenticatedStatus) {
     };
 }
 
+
+
 var CREATE_NEW_USER = 'CREATE_NEW_USER';
 function createNewUser() {
     return (dispatch) => {
@@ -80,6 +82,7 @@ function fetchQuestionError(error) {
     };
 }
 
+
 var POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
 function postQuestionAnsweredStatus(userId, answerFlag) {
   return (dispatch) => {
@@ -118,6 +121,13 @@ function postQuestionAnsweredError(error) {
     };
 }
 
+var SET_CURRENT_USER_INPUT = 'SET_CURRENT_USER_INPUT';
+function setCurrentUserInput (currentUserInput) {
+  return {
+      type: SET_CURRENT_USER_INPUT,
+      payload: currentUserInput
+  }
+}
 
 exports.FETCH_QUESTION_SUCCESS = FETCH_QUESTION_SUCCESS;
 exports.fetchQuestionSuccess = fetchQuestionSuccess;
@@ -133,3 +143,6 @@ exports.createNewUserSuccess = createNewUserSuccess;
 
 exports.CREATE_NEW_USER_ERROR = CREATE_NEW_USER_ERROR;
 exports.createNewUserError = createNewUserError;
+
+exports.SET_CURRENT_USER_INPUT = SET_CURRENT_USER_INPUT;
+exports.setCurrentUserInput = setCurrentUserInput;
