@@ -8,6 +8,7 @@ var thunk = require('redux-thunk').default;
 
 var actions = require('./actions/actions');
 var reducers = require('./reducers/reducers').frenchXReducer;
+var routes = require('./components/routes');
 
 var App = require('./components/App');
 
@@ -16,7 +17,7 @@ var store = createStore(reducers, applyMiddleware(thunk));
 document.addEventListener('DOMContentLoaded', function() {
     ReactDOM.render(
     <Provider store={store}>
-        <App />
+        {routes}
     </Provider>,
     document.getElementById('app')
     )

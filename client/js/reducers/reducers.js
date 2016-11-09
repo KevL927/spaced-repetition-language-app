@@ -4,6 +4,7 @@ var FETCH_QUESTION_ERROR = actions.FETCH_QUESTION_ERROR;
 var POST_QUESTION_ANSWERED_ERROR = actions.POST_QUESTION_ANSWERED_ERROR;
 var CREATE_NEW_USER_SUCCESS = actions.CREATE_NEW_USER_SUCCESS;
 var CREATE_NEW_USER_ERROR = actions.CREATE_NEW_USER_ERROR;
+var SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT; 
 
 var initialState = {
     currentQuestion: null,
@@ -13,6 +14,8 @@ var initialState = {
     isAuthenticated: false,
     userId: null,
     createNewUserError: null,
+    currentAnswerFlag: null,
+    currentUserInput: null,
     result: []
 }
 
@@ -54,6 +57,12 @@ var frenchXReducer = function (state, action) {
         case CREATE_NEW_USER_ERROR:
             newState = Object.assign({}, state, {
                 createNewUserError: action.payload
+            });
+            return newState;
+            
+        case SET_CURRENT_USER_INPUT:
+            newState = Object.assign({}, state, {
+                currentUserInput: action.payload
             });
             return newState;
         
