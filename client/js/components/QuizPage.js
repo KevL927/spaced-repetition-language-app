@@ -1,16 +1,31 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var connect = require('react-redux').connect;
 
-var Quiz = function () {
-    return (
-        <div className="quiz-cards">
-            <div className="french-card"></div>
-            <div className="english-card">
-                <input type="text" name="answer">
-                    <input type="submit" name="submit">
+var Quiz = React.createClass({
+    
+    detectTextInput: function () {
+        
+    },
+    
+    submitAnswer: function (event) {
+        event.preventDefault();
+        this.props.dispatch(postQuesthis.refs.userInput.value);
+    },
+    
+    render: function () {
+        return (
+            <div className="quiz-card">
+                <div className="question">
+                    <Question />
+                </div>
+                <div className="answer">
+                    <input type="text" name="answer" ref="userInput" onChange={this.detectTextInput}></input>
+                </div>
+                    <input type="submit" name="submit" onSubmit={this.submitAnswer}></input>
             </div>
-        </div>
-    );
-};
+        );
+    }
+});
 
-module.exports = Quiz;
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Quiz);
