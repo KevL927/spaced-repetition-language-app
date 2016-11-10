@@ -5,9 +5,13 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userName: {
+    access_token: {
         type: String,
         required: true
+    },
+    userName: {
+        type: String,
+        required: false
     },
     questionOrder: [{
        questionId: {
