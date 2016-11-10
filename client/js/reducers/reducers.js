@@ -1,10 +1,10 @@
-var actions = require('../actions/actions');
-var FETCH_QUESTION_SUCCESS = actions.FETCH_QUESTION_SUCCESS;
-var FETCH_QUESTION_ERROR = actions.FETCH_QUESTION_ERROR;
-var POST_QUESTION_ANSWERED_ERROR = actions.POST_QUESTION_ANSWERED_ERROR;
-var CREATE_NEW_USER_SUCCESS = actions.CREATE_NEW_USER_SUCCESS;
-var CREATE_NEW_USER_ERROR = actions.CREATE_NEW_USER_ERROR;
-var SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT; 
+var actions = require('../actions/actions'),
+    FETCH_QUESTION_SUCCESS = actions.FETCH_QUESTION_SUCCESS,
+    FETCH_QUESTION_ERROR = actions.FETCH_QUESTION_ERROR,
+    POST_QUESTION_ANSWERED_ERROR = actions.POST_QUESTION_ANSWERED_ERROR,
+    CREATE_NEW_USER_SUCCESS = actions.CREATE_NEW_USER_SUCCESS,
+    CREATE_NEW_USER_ERROR = actions.CREATE_NEW_USER_ERROR,
+    SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT;
 
 var initialState = {
     currentQuestion: null,
@@ -20,55 +20,46 @@ var initialState = {
 }
 
 
-var frenchXReducer = function (state, action) {
-    var newState;
-    
-    state = state || initialState;
-    
+module.exports = function (state, action) {
+   
+   function updateState (newState) {
+       return Object.assign({}, state, newState)
+   }
+   
     switch(action.type) {
         case FETCH_QUESTION_SUCCESS:
-            newState = Object.assign({}, state, {
+            return updateState({
                 currentQuestion: action.payload.question,
                 currentAnswer: action.payload.answer,
                 result: action.payload.results
             });
-            return newState;
         
-    
         case FETCH_QUESTION_ERROR:
-            newState = Object.assign({}, state, {
+            return updateState({
                 fetchGetQuestionError: action.payload
             });
-            return newState;
         
-    
         case POST_QUESTION_ANSWERED_ERROR:
-            newState = Object.assign({}, state, {
+            return updateState({
                 postQuestionAnsweredError: action.payload
             });
-            return newState;
         
         case CREATE_NEW_USER_SUCCESS:
-            newState = Object.assign({}, state, {
+            return updateState({
                 userId: action.payload
             });
-            return newState;
         
         case CREATE_NEW_USER_ERROR:
-            newState = Object.assign({}, state, {
+            return updateState({
                 createNewUserError: action.payload
             });
-            return newState;
             
         case SET_CURRENT_USER_INPUT:
-            newState = Object.assign({}, state, {
+            return updateState({
                 currentUserInput: action.payload
             });
-            return newState;
         
         default:
-            return state;
+            return initialState;
     }
 }
-
-exports.frenchXReducer = frenchXReducer;
