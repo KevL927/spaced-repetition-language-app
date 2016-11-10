@@ -23,15 +23,15 @@ var initialState = {
 module.exports = function (state, action) {
    
    function updateState (newState) {
-       return Object.assign({}, state, newState)
+       return Object.assign({}, state, newState);
    }
    
     switch(action.type) {
         case FETCH_QUESTION_SUCCESS:
             return updateState({
-                currentQuestion: action.payload.question,
-                currentAnswer: action.payload.answer,
-                result: action.payload.results
+                currentQuestion: action.payload.questionObject.question,
+                currentAnswer: action.payload.questionObject.answer,
+                result: action.payload.result
             });
         
         case FETCH_QUESTION_ERROR:

@@ -9,30 +9,21 @@ function checkAuthentication(authenticatedStatus) {
 }
 
 
-
 var CREATE_NEW_USER = 'CREATE_NEW_USER';
 function createNewUser() {
-    return (dispatch) => {
-    return fetch('/...', {
+    return function (dispatch) {
+    return fetch('/createUser', {
       method: 'POST'
-    }).then(response => response.json().then(json => ({ json, response })))
-      .then(({json, response}) => {
-      if (response.ok === false) {
-        return Promise.reject(json);
-      }
-      return json;
-    })
-    .then(
-      data => {
-        dispatch(createNewUserSuccess(data));
-      },
-      ({response, data}) => {
-          
-        if(response.status == 401) {
-          dispatch(createNewUserSuccess(data.error));
+    }).then(function (response) { 
+        if (response.ok === false) {
+          return Promise.reject(response.json());
         }
-      }
-    );
+        return response.json() 
+      }).then(function (data) {
+        dispatch(createNewUserSuccess({json: data}));
+      }).catch(function (data) {
+          dispatch(createNewUserError(data.error));
+      });
   };
 }
 
@@ -53,15 +44,15 @@ function createNewUserError(error) {
 }
 
 var FETCH_QUESTION = 'FETCH_QUESTION';
-function fetchQuestion() {
+function fetchQuestion(currentUserId) {
     return function(dispatch) {
-        return fetch('/...').then(function(res, err) {
-            if (err) {
-                return dispatch(fetchQuestionError(err));
-            }
+        return fetch('/question/' + currentUserId).then(function(res) {
             return res.json();
         }).then(function(response) {
-            return dispatch(fetchQuestionSuccess(response.question));
+          console.log('questionObject: ', response);
+            return dispatch(fetchQuestionSuccess(response));
+        }).catch(function (err) {
+          return dispatch(fetchQuestionError(err));
         });
     };
 }
@@ -84,34 +75,38 @@ function fetchQuestionError(error) {
 
 
 var POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
-function postQuestionAnsweredStatus(userId, answerFlag) {
-  return (dispatch) => {
-    return fetch('/...', {
-      method: 'POST',
-      body: JSON.stringify({
-          currentUserId: userId,
-          answerFlag: answerFlag
-      })
-    }).then(response => response.json().then(json => ({ json, response })))
-      .then(({json, response}) => {
-      if (response.ok === false) {
-        return Promise.reject(json);
-      }
-      return json;
-    })
-    .then(
-      data => {
-        dispatch(fetchQuestionSuccess(data))
+ function postQuestionAnsweredStatus(userId, answerFlag) {
+   return (dispatch) => {
+     return fetch('/app/v1/question', {
+       method: 'POST',
+       headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
       },
-      ({response, data}) => {
-          
-        if(response.status == 401) {
-          dispatch(postQuestionAnsweredError(data.error));
-        }
-      }
-    );
-  };
-}
+       body: JSON.stringify({
+           currentUserId: userId,
+           answerFlag: answerFlag
+       })
+     }).then(response => response.json().then(json => ({ json, response })))
+       .then(({json, response}) => {
+       if (response.ok === false) {
+         return Promise.reject(json);
+       }
+       return json;
+     })
+     .then(
+       data => {
+         dispatch(fetchQuestionSuccess(data))
+       },
+       ({response, data}) => {
+           
+         if(response.status == 401) {
+           dispatch(postQuestionAnsweredError(data.error));
+         }
+       }
+     );
+   };
+ }
 
 var POST_QUESTION_ANSWERED_ERROR = "POST_QUESTION_ANSWERED_ERROR";
 function postQuestionAnsweredError(error) {
@@ -129,11 +124,32 @@ function setCurrentUserInput (currentUserInput) {
   }
 }
 
+var REDIRECT_LOGIN= 'REDIRECT_LOGIN';
+function redirectLogin() {
+    return function(dispatch) {
+        return fetch('/auth/google').then(function(res) {
+            return res.json();
+        }).then(function(response) {
+          console.log(response)
+            // return dispatch(fetchQuestionSuccess(response));
+        }).catch(function (err) {
+          console.log(err);
+          // return dispatch(fetchQuestionError(err));
+        });
+    };
+}
+
+exports.FETCH_QUESTION = FETCH_QUESTION;
+exports.fetchQuestion = fetchQuestion;
+
 exports.FETCH_QUESTION_SUCCESS = FETCH_QUESTION_SUCCESS;
 exports.fetchQuestionSuccess = fetchQuestionSuccess;
 
 exports.FETCH_QUESTION_ERROR = FETCH_QUESTION_ERROR;
 exports.fetchQuestionError = fetchQuestionError;
+
+exports.POST_QUESTION_ANSWERED_STATUS = POST_QUESTION_ANSWERED_STATUS;
+exports.postQuestionAnsweredStatus = postQuestionAnsweredStatus;
 
 exports.POST_QUESTION_ANSWERED_ERROR = POST_QUESTION_ANSWERED_ERROR;
 exports.postQuestionAnsweredError = postQuestionAnsweredError;
@@ -146,3 +162,6 @@ exports.createNewUserError = createNewUserError;
 
 exports.SET_CURRENT_USER_INPUT = SET_CURRENT_USER_INPUT;
 exports.setCurrentUserInput = setCurrentUserInput;
+
+exports.REDIRECT_LOGIN = REDIRECT_LOGIN;
+exports.redirectLogin = redirectLogin;
