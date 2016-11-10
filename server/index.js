@@ -7,7 +7,6 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
-
 var User = require('./models/user');
 var Questions = require('./models/question');
 var sortQuestion = require('./set-question-order/sort_by_space_repetition');
@@ -18,10 +17,7 @@ var HOST = process.env.HOST;
 var PORT = process.env.PORT || 8080;
 mongoose.Promise = global.Promise;
 
-
 console.log(`Server running in ${process.env.NODE_ENV} mode`);
-
-
 
 app.use(express.static(process.env.CLIENT_PATH));
 app.use(jsonParser);
@@ -79,12 +75,10 @@ passport.use(new GoogleStrategy({
                 errorHandler(user);
             }
             if (user) {
-                console.log('user exists ' + user._id);
                 user.access_token = accessToken;
                 user.save(function(err, doc) {
-                    return done(err, doc);
+                return done(err, doc);
                 });
-
             }
             else {
                 var newUser = new User({
@@ -96,7 +90,6 @@ passport.use(new GoogleStrategy({
                 });
                 newUser.save(function(err, res) {
                     if (err) return errorHandler(err, res);
-                    console.log('user does not exist ' + res._id);
                     return done(null, newUser);
                 });
             }
@@ -116,12 +109,11 @@ app.get('/auth/google',
     }));
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        //   successRedirect: '/',
         failureRedirect: '/auth/google/failure'
     }),
     function(req, res) {
-        return res.redirect('/' + req.user.access_token);
-    }
+        return res.redirect('/?access_token=' + req.user.access_token+"&userId="+req.user._id+"&userName="+req.user.userName);
+    }   
 );
 
 //token auth setup
@@ -147,11 +139,6 @@ passport.use(
         }
     )
 );
-
-
-
-
-
 
 //get first question displayed, everytime user logs in
 app.get('/question/:currentUserId', passport.authenticate('bearer', {
@@ -181,8 +168,6 @@ app.get('/question/:currentUserId', passport.authenticate('bearer', {
         }
     });
 
-
-
 //sorting the question's array and responding with the next question
 app.post('/app/v1/question', function(req, res) {
     var answerFlag = req.body.answerFlag; //current_answer_state from asnc  functions
@@ -195,7 +180,6 @@ app.post('/app/v1/question', function(req, res) {
     });
 
     function getCurrentUser(currentUser) {
-
         var currentResult = currentUser.results.slice(-1),
             newQuestionOrder = sortQuestion(currentUser.questionOrder, answerFlag),
             questionId = newQuestionOrder[0].questionId,
@@ -224,18 +208,12 @@ app.post('/app/v1/question', function(req, res) {
 
 });
 
-
-
 function errorHandler(res) {
     return res.status(401).json({
         message: 'Internal Server Error'
     });
 }
 
-
-// when new user is created- post happens first
-//to get the questions displayed for new user get(/)
-//get all the questions
 app.get('/questions', function(req, res) {
     Questions.find({}, function(err, question) {
         if (err) return errorHandler(res);
@@ -251,3 +229,14 @@ app.get('/getUsers', function(req, res) {
 });
 
 exports.app = app;
+// app.get(
+//     '/profile',
+//     passport.authenticate('bearer', { session: false }),
+//     function(req, res) {
+//         res.send("LOGGED IN as " + req.user.facebookId + " - <a href=\"/logout\">Log out</a>");
+//     }
+// );
+
+// when new user is created- post happens first
+//to get the questions displayed for new user get(/)
+//get all the questions
