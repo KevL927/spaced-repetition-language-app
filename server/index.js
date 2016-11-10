@@ -71,6 +71,7 @@ passport.use(new GoogleStrategy({
   
   function( request, accessToken, refreshToken, profile, done) {
             User.findOne({ userGoogleToken: profile.id }, function (err, user) {
+                      console.log(accessToken);
                 if(err){
                     errorHandler(user);
                 }
@@ -105,33 +106,31 @@ app.get('/auth/google',
 ));
 app.get( '/auth/google/callback', 
   passport.authenticate( 'google', { 
-      // successRedirect: '/',
+    //   successRedirect: '/',
       failureRedirect: '/auth/google/failure'
  }),
 function(req, res){
     //console.log(req.isAuthenticated());
-  // return res.set('location', 'https://space-repetion-app-surbi.c9users.io/');
-  return res.json({userId:req.user._id, userName:req.user.userName});
+// return res.set('location', 'https://space-repetion-app-surbi.c9users.io/');
+    return res.redirect('/');
+//   return res.send({userId:req.user._id, userName:req.user.userName});
+// res.json({});
 }
 );
-
-
-
-
 
 //get first question displayed, everytime user logs in
 app.get('/question/:currentUserId', function(req, res){
     var currentUserId = req.params.currentUserId; 
      User.findOne({_id:currentUserId}, function(err, user){
          if (err) return errorHandler(res);
-         console.log(user);
-        return getQuestion(user.questionOrder);
+        return getQuestion(user);
     });
-    function getQuestion(questionOrder){
-    var questionId = questionOrder[0].questionId;
+    function getQuestion(userInfo){
+    var result = userInfo.results.splice(-1);
+    var questionId = userInfo.questionOrder[0].questionId;
     Questions.findOne({_id:questionId}, function(err, questionObject){
         if (err) return errorHandler(res);
-        return res.json(questionObject);
+        return res.json({questionObject, result: result});
     });
     }
 });
@@ -140,12 +139,11 @@ app.get('/question/:currentUserId', function(req, res){
 app.post('/app/v1/question', function(req, res){
     var answerFlag = req.body.answerFlag;    //current_answer_state from asnc  functions
     var user_ID = req.body.currentUserId;   //_id(current_user)
-    
     User.findOne({_id:user_ID}, function(err, userObject){
           if (err) return errorHandler(res);
-          console.log(userObject);
           return getCurrentUser(userObject);
     });
+    
     function getCurrentUser(currentUser){
         
         var currentResult =  currentUser.results.slice(-1),
@@ -157,15 +155,16 @@ app.post('/app/v1/question', function(req, res){
             if (err) return errorHandler(res);
             return updateQuestionOrder(questionJSON, newQuestionOrder, result);
         });
-        function updateQuestionOrder(questionJSON, newQuestionOrder, result){
+    }
+    
+    function updateQuestionOrder(questionObject, newQuestionOrder, result){
             User.findByIdAndUpdate(user_ID,{
                 questionOrder: newQuestionOrder,
                 result: result 
             },function(err, userJSON){
                 if (err) return errorHandler(res);
-                return res.json(questionJSON);
+                return res.json({questionObject, result: result});
             });
-        }
     }
         
 });

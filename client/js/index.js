@@ -7,7 +7,7 @@ var Provider = require('react-redux').Provider;
 var thunk = require('redux-thunk').default;
 
 var actions = require('./actions/actions');
-var reducers = require('./reducers/reducers').frenchXReducer;
+var reducers = require('./reducers/reducers');
 var routes = require('./components/routes');
 
 var App = require('./components/App');
