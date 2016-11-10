@@ -16,6 +16,9 @@ var App = React.createClass({
         return (
             <div className="welcome-page">
                 <h1>FrenchX</h1><br/>
+                <p>{this.props.location.query.access_token}</p>
+                <p>{this.props.location.query.userName}</p>
+                <p>{this.props.location.query.userId}</p>
                 <h3>Learn Languages Through Spaced Repetition</h3><br/>
                  <a className="googleSignIn" href="/auth/google">Login with Google</a>
             </div>
@@ -23,7 +26,7 @@ var App = React.createClass({
     }
 });
 
-//<input type="submit" className="googleSignIn" onClick={this.redirectLoginUrl} value="Login with Google"></input>
+
 
 
 function mapDispatchToProps (dispatch) {
