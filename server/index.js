@@ -68,9 +68,8 @@ passport.use(new GoogleStrategy({
     callbackURL: clientIDs.google.callbackURL,
     passReqToCallback   : true
   },
+  
   function( request, accessToken, refreshToken, profile, done) {
-      //console.log(profile);
-       
             User.findOne({ userGoogleToken: profile.id }, function (err, user) {
                 if(err){
                     errorHandler(user);
@@ -81,11 +80,12 @@ passport.use(new GoogleStrategy({
                 } else {
                     var newUser = new User({
                                         userGoogleToken: profile.id,
+                                        userName: profile.email.slice(0,profile.email.indexOf('@')),
                                         questionOrder: questionFactory(),
                                         results: [0]
                                   });
                 newUser.save(function(err, res) {
-                    if (err) return errorHandler(err);
+                    if (err) return errorHandler(err, res);
                     console.log('user does not exist '+res._id);
                        return done(null, newUser);
                 });
@@ -96,6 +96,7 @@ passport.use(new GoogleStrategy({
 }
 ));
 
+
 app.get('/auth/google',
  passport.authenticate('google', { scope: [
    'https://www.googleapis.com/auth/plus.login',
@@ -103,22 +104,20 @@ app.get('/auth/google',
  ] }
 ));
 app.get( '/auth/google/callback', 
-   passport.authenticate( 'google', { 
-       successRedirect: '/',
-       failureRedirect: '/auth/google/failure'
-}));
+  passport.authenticate( 'google', { 
+      // successRedirect: '/',
+      failureRedirect: '/auth/google/failure'
+ }),
+function(req, res){
+    //console.log(req.isAuthenticated());
+  // return res.set('location', 'https://space-repetion-app-surbi.c9users.io/');
+  return res.json({userId:req.user._id, userName:req.user.userName});
+}
+);
 
-app.post('/createUser', function(req, res) {
-    var newUser = new User({
-        userGoogleToken: 'mariosuncle@gmail.com',
-        questionOrder: questionFactory(),
-        results: [0]
-    });
-    newUser.save(function(err, user) {
-        if (err) return errorHandler(res);
-            return res.status(201).json(user._id);
-    });
-});
+
+
+
 
 //get first question displayed, everytime user logs in
 app.get('/question/:currentUserId', function(req, res){
