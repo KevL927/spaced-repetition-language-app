@@ -5,6 +5,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    userName: {
+        type: String,
+        required: true
+    },
     questionOrder: [{
        questionId: {
            type:String,
