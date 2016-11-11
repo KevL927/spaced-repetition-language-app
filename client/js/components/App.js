@@ -31,7 +31,7 @@ var App = React.createClass({
                 <div className="welcome-page">
                     <h1>FrenchX</h1><br/>
                     <h3>Learn Languages Through Spaced Repetition</h3><br/>
-                     <a className="googleSignIn" href="/auth/google">Login with Google</a>
+                    <a href="/auth/google"><img src="../../assets/thegoogle.png" /></a>
                 </div>
             ); 
         }
