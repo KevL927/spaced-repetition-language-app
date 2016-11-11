@@ -75,14 +75,10 @@ passport.use(new GoogleStrategy({
                 errorHandler(user);
             }
             if (user) {
-                console.log(user._id,'acctoken',accessToken);
                 user.access_token = accessToken;
                 user.save(function(err){
                     return done(err, user);
                 })
-                // User.findByIdAndUpdate(user._id,{access_token : accessToken},function(err, doc) {
-                // return done(err, doc);
-                // });
             }
             else {
                 var newUser = new User({
@@ -178,19 +174,20 @@ app.post('/app/v1/question',passport.authenticate('bearer', {
     }), function(req, res) {
     var answerFlag = req.body.answerFlag; //current_answer_state from asnc  functions
     var user_ID = req.body.currentUserId; //_id(current_user)
+    
+    
     User.findOne({
         _id: user_ID
     }, function(err, userObject) {
         if (err) return errorHandler(res);
         return getCurrentUser(userObject);
     });
-
+//getCurrentUser(userObject);
     function getCurrentUser(currentUser) {
         var currentResult = currentUser.results,
             newQuestionOrder = sortQuestion(currentUser.questionOrder, answerFlag),
             questionId = newQuestionOrder[0].questionId,
             resultUpdate = ((answerFlag === 'correct') ? (currentResult + 10) : currentResult);
-    console.log('cr',currentResult);
          Questions.findOne({
             _id: questionId
         }, function(err, questionJSON) {
@@ -201,15 +198,14 @@ app.post('/app/v1/question',passport.authenticate('bearer', {
             
     }
 
-      
-    
     function updateQuestionOrder(questionObject, newQuestionOrder, resultUpdate) {
         console.log('resultUpdate',resultUpdate);
-        User.findByIdAndUpdate(user_ID, {
-            questionOrder: newQuestionOrder,
-            result: resultUpdate
-        }, function(err, userJSON) {
+        User.findOne({_id:user_ID}, function(err, userJSON) {
+            userJSON.results = resultUpdate;
+            userJSON.questionOrder = newQuestionOrder;
+            userJSON.save();
             if (err) return errorHandler(res);
+            console.log(userJSON);
             return res.json({
                 questionObject,
                 result: resultUpdate
@@ -252,49 +248,6 @@ app.post('/createQuestion', function(req, res){
     });
 })
 
-//         bcrypt.hash(password, salt, function(err, hash) {
-//             if (err) {
-//                 return res.status(500).json({
-//                     message: 'Internal server error'
-//                 });
-//             }
-//             var user = new User({
-//                 username: username,
-//                 password: hash
-//             });
-//             user.save(function(err) {
-//                 if (err) {
-//                     return res.status(500).json({
-//                         message: 'Internal server error'
-//                     });
-//                 }
-//                 console.log('Username and password created');
-//                 return res.status(201).location('/users/' + user._id).json({});
-//             });
-//         });
-//     });
-// });
 
-    //   var newUser = new User({
-    //                 userGoogleToken: profile.id,
-    //                 access_token: accessToken,
-    //                 userName: profile.email.slice(0, profile.email.indexOf('@')),
-    //                 questionOrder: questionFactory(),
-    //                 results: [0]
-    //             });
-    //             newUser.save(function(err, res) {
-    //                 if (err) return errorHandler(err, res);
-    //                 return done(null, newUser);
 
 exports.app = app;
-// app.get(
-//     '/profile',
-//     passport.authenticate('bearer', { session: false }),
-//     function(req, res) {
-//         res.send("LOGGED IN as " + req.user.facebookId + " - <a href=\"/logout\">Log out</a>");
-//     }
-// );
-
-// when new user is created- post happens first
-//to get the questions displayed for new user get(/)
-//get all the questions
