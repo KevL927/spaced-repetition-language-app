@@ -28,10 +28,12 @@ function createNewUser() {
 }
 
 var CREATE_NEW_USER_SUCCESS = 'CREATE_NEW_USER_SUCCESS';
-function createNewUserSuccess(userId) {
+function createNewUserSuccess(accessToken, userId, userName) {
     return {
-        type: FETCH_QUESTION_SUCCESS,
-        payload: userId
+        type: CREATE_NEW_USER_SUCCESS,
+        accessToken: accessToken,
+        currentUserId: userId,
+        currentUserName:userName
     };
 }
 
@@ -124,20 +126,20 @@ function setCurrentUserInput (currentUserInput) {
   }
 }
 
-var REDIRECT_LOGIN= 'REDIRECT_LOGIN';
-function redirectLogin() {
-    return function(dispatch) {
-        return fetch('/auth/google').then(function(res) {
-            return res.json();
-        }).then(function(response) {
-          console.log(response)
-            // return dispatch(fetchQuestionSuccess(response));
-        }).catch(function (err) {
-          console.log(err);
-          // return dispatch(fetchQuestionError(err));
-        });
-    };
-}
+// var REDIRECT_LOGIN= 'REDIRECT_LOGIN';
+// function redirectLogin() {
+//     return function(dispatch) {
+//         return fetch('/auth/google').then(function(res) {
+//             return res.json();
+//         }).then(function(response) {
+//           console.log(response)
+//             // return dispatch(fetchQuestionSuccess(response));
+//         }).catch(function (err) {
+//           console.log(err);
+//           // return dispatch(fetchQuestionError(err));
+//         });
+//     };
+// }
 
 exports.FETCH_QUESTION = FETCH_QUESTION;
 exports.fetchQuestion = fetchQuestion;
@@ -163,5 +165,5 @@ exports.createNewUserError = createNewUserError;
 exports.SET_CURRENT_USER_INPUT = SET_CURRENT_USER_INPUT;
 exports.setCurrentUserInput = setCurrentUserInput;
 
-exports.REDIRECT_LOGIN = REDIRECT_LOGIN;
-exports.redirectLogin = redirectLogin;
+// exports.REDIRECT_LOGIN = REDIRECT_LOGIN;
+// exports.redirectLogin = redirectLogin;

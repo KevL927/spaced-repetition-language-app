@@ -27,7 +27,6 @@ var Quiz = React.createClass({
                     <Question />
                     <Feedback answer={this.props.currentAnswer} />
                 </div>
-                <Feedback />
                 <div className = "answer">
                     <input type = "text" name="answer" ref="userInput" onChange = {this.detectTextInput}></input>
                 </div>
