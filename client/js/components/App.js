@@ -13,10 +13,10 @@ var userLogout = require('../actions/actions').userLogout;
 var App = React.createClass({
     
     componentDidMount: function() {
-                 var access_token = this.props.location.query.access_token, 
-             userId = this.props.location.query.userId, 
-             userName = this.props.location.query.userName;
-    this.props.retrieveUserInfo(access_token, userId, userName);
+        var access_token = this.props.location.query.access_token, 
+            userId = this.props.location.query.userId, 
+            userName = this.props.location.query.userName;
+            this.props.retrieveUserInfo(access_token, userId, userName);
 
     },
     
@@ -57,7 +57,8 @@ function mapStateToProps (state) {
     return {
         currentUserName: state.currentUserName,
         currentUserId: state.currentUserId,
-        isAuthenticated: state.isAuthenticated
+        isAuthenticated: state.isAuthenticated,
+        
     };
 }
 

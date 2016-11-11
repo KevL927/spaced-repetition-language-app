@@ -30,15 +30,14 @@ var Quiz = React.createClass({
     render: function () {
         return (
             <div className="quiz-card">
-                <div className="question">
                     <Question question={this.props.currentQuestion}/>
                     <Answer answer={this.props.currentAnswer} />
-                </div>
-                <div className = "answer">
+             
                     <input type = "text" name="answer" ref="userInput" onChange = {this.detectTextInput}></input>
-                </div>
+               
                     <input type = "submit" name = "submit" onClick = {this.checkAnswer} disabled = {!this.props.currentUserInput}></input>
                     <Result result={this.props.result}/>
+                    <p><Count /></p> 
             </div>
         );
     }
