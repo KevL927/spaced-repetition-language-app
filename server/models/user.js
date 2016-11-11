@@ -11,7 +11,7 @@ var UserSchema = new mongoose.Schema({
     },
     userName: {
         type: String,
-        required: false
+        required: true
     },
     questionOrder: [{
        questionId: {
