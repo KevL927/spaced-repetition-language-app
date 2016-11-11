@@ -38,7 +38,7 @@ var Quiz = React.createClass({
                
                     <input type = "submit" name = "submit" onClick = {this.checkAnswer} disabled = {!this.props.currentUserInput}></input>
                     <Result result={this.props.result}/>
-                    <p><Count result={this.props.result} /></p> 
+                    <Count result={this.props.result} />
             </div>
         );
     }
