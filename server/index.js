@@ -188,6 +188,8 @@ app.post('/app/v1/question',passport.authenticate('bearer', {
             newQuestionOrder = sortQuestion(currentUser.questionOrder, answerFlag),
             questionId = newQuestionOrder[0].questionId,
             resultUpdate = ((answerFlag === 'correct') ? (currentResult + 10) : currentResult);
+            
+            console.log('new question order',questionId, newQuestionOrder);
          Questions.findOne({
             _id: questionId
         }, function(err, questionJSON) {
@@ -199,7 +201,6 @@ app.post('/app/v1/question',passport.authenticate('bearer', {
     }
 
     function updateQuestionOrder(questionObject, newQuestionOrder, resultUpdate) {
-        console.log('resultUpdate',resultUpdate);
         User.findOne({_id:user_ID}, function(err, userJSON) {
             userJSON.results = resultUpdate;
             userJSON.questionOrder = newQuestionOrder;
