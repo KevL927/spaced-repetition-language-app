@@ -105,7 +105,7 @@ var POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
      })
      .then(
        data => {
-           console.log('data',data);
+          
          dispatch(fetchQuestionSuccess(data))
        },
        ({response, data}) => {
@@ -132,6 +132,22 @@ function setCurrentUserInput (currentUserInput) {
       type: SET_CURRENT_USER_INPUT,
       payload: currentUserInput
   }
+}
+
+var SET_ANSWER_FLAG = "SET_ANSWER_FLAG";
+var setAnswerFlag = function(answerFlag){
+    return {
+        type: SET_ANSWER_FLAG,
+        payload: answerFlag
+    }
+}
+
+var SET_LAST_ANSWER_FLAG = "SET_LAST_ANSWER_FLAG";
+var setLastAnswerFlag = function(lastAnswerFlag){
+    return {
+        type: SET_LAST_ANSWER_FLAG,
+        payload: lastAnswerFlag
+    }
 }
 
 // var REDIRECT_LOGIN= 'REDIRECT_LOGIN';
@@ -175,3 +191,9 @@ exports.setCurrentUserInput = setCurrentUserInput;
 
 exports.userLogout = userLogout;
 exports.USER_LOGOUT = USER_LOGOUT;
+
+exports.SET_ANSWER_FLAG = SET_ANSWER_FLAG;
+exports.setAnswerFlag = setAnswerFlag;
+
+exports.SET_LAST_ANSWER_FLAG = SET_LAST_ANSWER_FLAG;
+exports.setLastAnswerFlag = setLastAnswerFlag;

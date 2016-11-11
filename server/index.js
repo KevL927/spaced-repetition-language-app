@@ -11,7 +11,9 @@ var User = require('./models/user');
 var Questions = require('./models/question');
 var sortQuestion = require('./set-question-order/sort_by_space_repetition');
 var questionFactory = require('./set-question-order/question_factory');
-var clientIDs = require("./config/client_secret");
+// var clientIDs = require("./config/client_secret");
+var secrets;
+    if (!process.env.CLIENT_ID) secrets = require('./config/client_secret');
 
 var HOST = process.env.HOST;
 var PORT = process.env.PORT || 8080;
@@ -61,9 +63,9 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use(new GoogleStrategy({
-        clientID: clientIDs.google.client_id,
-        clientSecret: clientIDs.google.client_secret,
-        callbackURL: clientIDs.google.callbackURL,
+        clientID: process.env.CLIENT_ID || secrets.google.client_id,
+        clientSecret: process.env.CLIENT_SECRET || secrets.google.client_secret,
+        callbackURL: process.env.CALL_BACK_URL || secrets.google.callbackURL,
         passReqToCallback: true
     },
 

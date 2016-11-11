@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 var Result = function(props){
     return(
-    <div>Score : {props.result} </div>
+    <div className='result'>Score : {props.result} </div>
     );
 }
 

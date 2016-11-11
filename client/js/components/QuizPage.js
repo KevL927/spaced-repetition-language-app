@@ -19,28 +19,57 @@ var Quiz = React.createClass({
     checkAnswer: function(event) {
         event.preventDefault();
         var answerFlag = (this.refs.userInput.value === this.props.currentAnswer) ? 'correct' : 'incorrect';
-        console.log(answerFlag);
-        this.submitAnswer(answerFlag);
+        this.props.dispatch(actions.setAnswerFlag(answerFlag));
+        this.refs.userInput.value ='';
+    },
+    
+    nextButton: function(event){
+        this.submitAnswer(this.props.currentAnswerFlag);
+        this.props.dispatch(actions.setAnswerFlag('null'));
     },
     
    submitAnswer: function (answerFlag) {
-       console.log(this.props.currentUserId, answerFlag, this.props.accessToken);
         this.props.dispatch(actions.postQuestionAnsweredStatus(this.props.currentUserId, answerFlag, this.props.accessToken));
     },
-    
+      
     render: function () {
-        return (
+        if(this.props.currentAnswerFlag == 'incorrect') {
+            return (
             <div className="quiz-card">
                     <Question question={this.props.currentQuestion}/>
                     <Answer answer={this.props.currentAnswer} />
-             
-                    <input type = "text" name="answer" ref="userInput" onChange = {this.detectTextInput}></input>
-               
-                    <input type = "submit" name = "submit" onClick = {this.checkAnswer} disabled = {!this.props.currentUserInput}></input>
-                    <Result result={this.props.result}/>
+                    <input className ='button' type = "submit" className="next" value="Next Question" name = "next" onClick = {this.nextButton} />
+                    <Result result={this.props.result} />
                     <Count result={this.props.result} />
             </div>
-        );
+            );
+        } 
+        else if(this.props.currentAnswerFlag == 'correct'){
+            return (
+                <div className="quiz-card">
+                        <Question question={this.props.currentQuestion}/>
+                        <p>Good Job!!!</p>
+                        
+                        <input className ='button' type = "submit" className="next" value="Next Question" name = "next" onClick = {this.nextButton} />
+                        <p>Score: {this.props.result+10}</p>
+                        <p>Count: {(this.props.result/10)+1}</p>
+                </div>
+            );
+        }
+        
+        else{
+            return (
+                <div className="quiz-card">
+                        <Question question={this.props.currentQuestion}/>
+                        <input type = "text" name="answer" ref="userInput" onChange = {this.detectTextInput}></input>
+                        <input className ='button' type = "submit" name="submit" onClick = {this.checkAnswer} disabled = {!this.props.currentUserInput}></input>
+                        
+                        <Result result = {this.props.result} />
+                        <Count result = {this.props.result} />
+                </div>
+            );
+        }
+        
     }
 });
 
@@ -51,7 +80,8 @@ function mapStateToProps (state, props){
         currentAnswer: state.currentAnswer,
        currentUserInput: state.currentUserInput,
        currentQuestion: state.currentQuestion,
-       result: state.result
+       result: state.result,
+       currentAnswerFlag: state.currentAnswerFlag
     };
 }
 
