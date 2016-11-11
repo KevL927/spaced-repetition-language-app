@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 var Count = function(props){
     return(
-    <div>{props.result/10} </div>
+    <div>Correctly Answered Questions: {(props.result/10)} </div>
     );
 }
 

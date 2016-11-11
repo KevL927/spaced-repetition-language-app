@@ -5,6 +5,7 @@ var actions = require('../actions/actions');
 var Question = require('./Question');
 var Answer = require('./Answer');
 var Result = require('./Result');
+var Count = require('./Count');
 
 var Quiz = React.createClass({
     componentWillMount: function() {
@@ -37,7 +38,7 @@ var Quiz = React.createClass({
                
                     <input type = "submit" name = "submit" onClick = {this.checkAnswer} disabled = {!this.props.currentUserInput}></input>
                     <Result result={this.props.result}/>
-                    <p><Count /></p> 
+                    <p><Count result={this.props.result} /></p> 
             </div>
         );
     }
