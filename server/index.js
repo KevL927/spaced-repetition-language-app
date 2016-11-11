@@ -90,7 +90,7 @@ passport.use(new GoogleStrategy({
                     access_token: accessToken,
                     userName: profile.email.slice(0, profile.email.indexOf('@')),
                     questionOrder: questionFactory(),
-                    results: [0]
+                    results: 0
                 });
                 newUser.save(function(err, res) {
                     if (err) return errorHandler(err, res);
@@ -158,7 +158,7 @@ app.get('/question/:currentUserId', passport.authenticate('bearer', {
         });
 
         function getQuestion(userInfo) {
-            var result = userInfo.results.splice(-1);
+            var result = userInfo.results;
             var questionId = userInfo.questionOrder[0].questionId;
             Questions.findOne({
                 _id: questionId
@@ -186,34 +186,33 @@ app.post('/app/v1/question',passport.authenticate('bearer', {
     });
 
     function getCurrentUser(currentUser) {
-        var currentResult = currentUser.results[currentUser.results.length-1],
+        var currentResult = currentUser.results,
             newQuestionOrder = sortQuestion(currentUser.questionOrder, answerFlag),
             questionId = newQuestionOrder[0].questionId,
-            resultUpdate = ((answerFlag === 'correct') ? (currentResult + 10) : currentResult),
-            userQuestionObject = findQuestionObject(questionId);
-            
-            return updateQuestionOrder(userQuestionObject, newQuestionOrder, resultUpdate);
-    }
-
-    function findQuestionObject(questionId) {
-        Questions.findOne({
+            resultUpdate = ((answerFlag === 'correct') ? (currentResult + 10) : currentResult);
+    console.log('cr',currentResult);
+         Questions.findOne({
             _id: questionId
         }, function(err, questionJSON) {
             if (err) return errorHandler(res);
-            return questionJSON;
+            console.log(resultUpdate);
+            return updateQuestionOrder(questionJSON, newQuestionOrder, resultUpdate);
         });
+            
     }
+
+      
     
     function updateQuestionOrder(questionObject, newQuestionOrder, resultUpdate) {
-        console.log(questionObject);
+        console.log('resultUpdate',resultUpdate);
         User.findByIdAndUpdate(user_ID, {
             questionOrder: newQuestionOrder,
-            result: [resultUpdate]
+            result: resultUpdate
         }, function(err, userJSON) {
             if (err) return errorHandler(res);
             return res.json({
                 questionObject,
-                result: [resultUpdate]
+                result: resultUpdate
             });
         });
     }

@@ -13,8 +13,7 @@ var Profile = require('./Profile');
 var routes = (
     <Router history={browserHistory} >
         <Route path="/" component={App} />
-        <Route path="/profile" component= {Profile}>
-        </Route>
+        <Route path="/profile" component= {Profile} />
         <Route path="/quiz" component= {Quiz} />
     </Router>
 );
