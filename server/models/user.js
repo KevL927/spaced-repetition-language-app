@@ -23,10 +23,10 @@ var UserSchema = new mongoose.Schema({
            required: true
        }
     }],
-    results: [{
+    results: {
            type: Number,
            required: true
-    }]
+    }
 });
 
 var User = mongoose.model('User', UserSchema);

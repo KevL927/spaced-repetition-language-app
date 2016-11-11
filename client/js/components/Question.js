@@ -1,9 +1,9 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var Question = function(){
+var Question = function(props){
     return(
-    <div> </div>
+    <div>{props.question} </div>
     );
 }
 

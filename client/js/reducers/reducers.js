@@ -4,7 +4,8 @@ var actions = require('../actions/actions'),
     POST_QUESTION_ANSWERED_ERROR = actions.POST_QUESTION_ANSWERED_ERROR,
     CREATE_NEW_USER_SUCCESS = actions.CREATE_NEW_USER_SUCCESS,
     CREATE_NEW_USER_ERROR = actions.CREATE_NEW_USER_ERROR,
-    SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT;
+    SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT,
+    USER_LOGOUT = actions.USER_LOGOUT;
 
 var initialState = {
     currentQuestion: null,
@@ -18,7 +19,7 @@ var initialState = {
     currentUserName: null,
     currentUserInput: null,
     accessToken: null,
-    result: []
+    result: 0
 }
 
 
@@ -50,10 +51,9 @@ function frenchXReducer (state, action) {
             var newState = Object.assign({}, state, {
                 accessToken: action.accessToken,
                 currentUserId: action.currentUserId,
-                currentUserName: action.currentUserName
+                currentUserName: action.currentUserName,
+                isAuthenticated: true
             });
-            console.log("state",state);
-            console.log("newstate",newState);
             return newState;
         
         case CREATE_NEW_USER_ERROR:
@@ -66,6 +66,10 @@ function frenchXReducer (state, action) {
            var newState = Object.assign({}, state, {
                 currentUserInput: action.payload
             });
+            return newState;
+        
+        case USER_LOGOUT:
+            var newState =  Object.assign({}, state, initialState)
             return newState;
         
         default:

@@ -27,6 +27,13 @@ function createNewUser() {
   };
 }
 
+var USER_LOGOUT = "USER_LOGOUT";
+function userLogout(){
+    return{
+        type: USER_LOGOUT
+    } 
+}
+
 var CREATE_NEW_USER_SUCCESS = 'CREATE_NEW_USER_SUCCESS';
 function createNewUserSuccess(accessToken, userId, userName) {
     return {
@@ -46,12 +53,11 @@ function createNewUserError(error) {
 }
 
 var FETCH_QUESTION = 'FETCH_QUESTION';
-function fetchQuestion(currentUserId) {
+function fetchQuestion(currentUserId, accessToken) {
     return function(dispatch) {
-        return fetch('/question/' + currentUserId).then(function(res) {
+        return fetch('/question/' + currentUserId + '?access_token=' + accessToken).then(function(res) {
             return res.json();
         }).then(function(response) {
-          console.log('questionObject: ', response);
             return dispatch(fetchQuestionSuccess(response));
         }).catch(function (err) {
           return dispatch(fetchQuestionError(err));
@@ -77,9 +83,9 @@ function fetchQuestionError(error) {
 
 
 var POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
- function postQuestionAnsweredStatus(userId, answerFlag) {
+ function postQuestionAnsweredStatus(userId, answerFlag, accessToken) {
    return (dispatch) => {
-     return fetch('/app/v1/question', {
+     return fetch('/app/v1/question?access_token=' + accessToken, {
        method: 'POST',
        headers: {
                 'Accept': 'application/json',
@@ -91,6 +97,7 @@ var POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
        })
      }).then(response => response.json().then(json => ({ json, response })))
        .then(({json, response}) => {
+            console.log('json',json);
        if (response.ok === false) {
          return Promise.reject(json);
        }
@@ -98,6 +105,7 @@ var POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
      })
      .then(
        data => {
+           console.log('data',data);
          dispatch(fetchQuestionSuccess(data))
        },
        ({response, data}) => {
@@ -165,5 +173,5 @@ exports.createNewUserError = createNewUserError;
 exports.SET_CURRENT_USER_INPUT = SET_CURRENT_USER_INPUT;
 exports.setCurrentUserInput = setCurrentUserInput;
 
-// exports.REDIRECT_LOGIN = REDIRECT_LOGIN;
-// exports.redirectLogin = redirectLogin;
+exports.userLogout = userLogout;
+exports.USER_LOGOUT = USER_LOGOUT;
