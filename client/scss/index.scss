@@ -1,15 +1,71 @@
-*{
+html{
   font-family: 'Roboto', sans-serif;
-
+  color: white;
 }
 
 body {
   background: #3f51b5;
+  width: 100%;
+  margin: 0;
 
 }
 
 h1 {
-  width: 100%;
+  width: auto;
+  height:40px;
   background: #303f9f;
-  margin: 0;
+  color: white;
+  font-size: 30px;
+  margin-top:2px;
+}
+
+
+h3 {
+  color: white;
+  text-align: center;
+  font-size: 25px;
+}
+
+.g-signin2 {
+ float: right;
+
+}
+
+input{
+  padding: 10px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+  color:#311B92;
+  background-color: white;
+      margin: 18px;
+  
+}
+
+.button{
+    background-color: #311B92;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 12px 31px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 11px;
+}
+
+.quiz-card{
+  text-align: center;
+      padding-top: 24rem;
+  
+}
+
+div{
+  text-align: center;
+  
+}
+
+.question{
+  font-size: 30 px;
+  
+  
 }

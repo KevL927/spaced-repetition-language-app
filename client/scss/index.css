@@ -1,5 +1,6 @@
 html{
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 body {
@@ -34,10 +35,12 @@ input{
   padding: 10px;
   border: solid 1px #dcdcdc;
   transition: box-shadow 0.3s, border 0.3s;
+  color:#311B92;
+  background-color: white;
   
 }
 
-button{
+.button{
   background-color: #311B92 ; /* Green */
     border: none;
     color: white;
@@ -49,7 +52,12 @@ button{
     font-size: 16px;
 }
 
-quiz-card{
-  float:center;
+.quiz-card{
+  text-align: center;
+  
+}
+
+div{
+  text-align: center;
   
 }
