@@ -18,7 +18,7 @@ var Quiz = React.createClass({
     
     checkAnswer: function(event) {
         event.preventDefault();
-        var answerFlag = (this.refs.userInput.value === this.props.currentAnswer) ? 'correct' : 'incorrect';
+        var answerFlag = (this.refs.userInput.value.toLowerCase() === this.props.currentAnswer) ? 'correct' : 'incorrect';
         this.props.dispatch(actions.setAnswerFlag(answerFlag));
         this.refs.userInput.value ='';
     },
