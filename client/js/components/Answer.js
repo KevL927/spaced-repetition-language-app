@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var Feedback = function (props) {
         return (
             <div className="feedback">
-                The currect answer is {props.answer} 
+                The correct answer is {props.answer} 
             </div>
         );
     };
