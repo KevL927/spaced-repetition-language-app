@@ -49,7 +49,6 @@ var Quiz = React.createClass({
                 <div className="quiz-card">
                         <Question question={this.props.currentQuestion}/>
                         <p>Good Job!!!</p>
-                        
                         <input className ='button' type = "submit" className="next" value="Next Question" name = "next" onClick = {this.nextButton} />
                         <p>Score: {this.props.result+10}</p>
                         <p>Count: {(this.props.result/10)+1}</p>
@@ -63,7 +62,6 @@ var Quiz = React.createClass({
                         <Question question={this.props.currentQuestion}/>
                         <input type = "text" name="answer" ref="userInput" onChange = {this.detectTextInput}></input>
                         <input className ='button' type = "submit" name="submit" onClick = {this.checkAnswer} disabled = {!this.props.currentUserInput}></input>
-                        
                         <Result result = {this.props.result} />
                         <Count result = {this.props.result} />
                 </div>
