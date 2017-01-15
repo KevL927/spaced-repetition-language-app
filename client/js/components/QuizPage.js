@@ -33,21 +33,21 @@ var Quiz = React.createClass({
     render: function () {
         if(this.props.currentAnswerFlag == 'incorrect') {
             return (
-            <div className="quiz-card">
+                <div className="quiz-card">
                     <Answer answer={this.props.prevAnswer} />
                     <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton}>Next Question</button>
                     <Result result={this.props.result} />
                     <Count result={this.props.result} />
-            </div>
+                </div>
             );
         } 
         else if(this.props.currentAnswerFlag == 'correct'){
             return (
                 <div className="quiz-card">
-                        <p>Good Job!!!</p>
-                        <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton}>Next Question</button>
-                        <p>Score: {this.props.result}</p>
-                        <p>Count: {this.props.result/10}</p>
+                    <p>Good Job!!!</p>
+                    <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton}>Next Question</button>
+                    <Result result={this.props.result} />
+                    <Count result={this.props.result} />
                 </div>
             );
         }
