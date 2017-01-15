@@ -81,7 +81,6 @@ function fetchQuestionError(error) {
     };
 }
 
-
 var POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
  function postQuestionAnsweredStatus(userId, answerFlag, accessToken) {
    return (dispatch) => {
@@ -119,6 +118,14 @@ function postQuestionAnsweredError(error) {
     };
 }
 
+var SET_PREV_ANSWER = "SET_PREV_ANSWER";
+function setPrevAnswer(currentAnswer) {
+    return {
+        type: SET_PREV_ANSWER,
+        payload: currentAnswer
+    };
+}
+
 var SET_CURRENT_USER_INPUT = 'SET_CURRENT_USER_INPUT';
 function setCurrentUserInput (currentUserInput) {
   return {
@@ -143,21 +150,6 @@ var setLastAnswerFlag = function(lastAnswerFlag){
     }
 }
 
-// var REDIRECT_LOGIN= 'REDIRECT_LOGIN';
-// function redirectLogin() {
-//     return function(dispatch) {
-//         return fetch('/auth/google').then(function(res) {
-//             return res.json();
-//         }).then(function(response) {
-//           console.log(response)
-//             // return dispatch(fetchQuestionSuccess(response));
-//         }).catch(function (err) {
-//           console.log(err);
-//           // return dispatch(fetchQuestionError(err));
-//         });
-//     };
-// }
-
 exports.FETCH_QUESTION = FETCH_QUESTION;
 exports.fetchQuestion = fetchQuestion;
 
@@ -172,6 +164,9 @@ exports.postQuestionAnsweredStatus = postQuestionAnsweredStatus;
 
 exports.POST_QUESTION_ANSWERED_ERROR = POST_QUESTION_ANSWERED_ERROR;
 exports.postQuestionAnsweredError = postQuestionAnsweredError;
+
+exports.SET_PREV_ANSWER = SET_PREV_ANSWER;
+exports.setPrevAnswer = setPrevAnswer;
 
 exports.CREATE_NEW_USER_SUCCESS = CREATE_NEW_USER_SUCCESS;
 exports.createNewUserSuccess = createNewUserSuccess;
