@@ -2,6 +2,7 @@ var actions = require('../actions/actions'),
     FETCH_QUESTION_SUCCESS = actions.FETCH_QUESTION_SUCCESS,
     FETCH_QUESTION_ERROR = actions.FETCH_QUESTION_ERROR,
     POST_QUESTION_ANSWERED_ERROR = actions.POST_QUESTION_ANSWERED_ERROR,
+    SET_PREV_ANSWER = actions.SET_PREV_ANSWER,
     CREATE_NEW_USER_SUCCESS = actions.CREATE_NEW_USER_SUCCESS,
     CREATE_NEW_USER_ERROR = actions.CREATE_NEW_USER_ERROR,
     SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT,
@@ -12,6 +13,7 @@ var actions = require('../actions/actions'),
 var initialState = {
     currentQuestion: null,
     currentAnswer: null,
+    prevAnswer: null,
     fetchGetQuestionError: null,
     postQuestionStatusError: null,
     isAuthenticated: false,
@@ -49,6 +51,11 @@ function frenchXReducer (state, action) {
                 postQuestionAnsweredError: action.payload
             });
             return newState;
+            
+        case SET_PREV_ANSWER:
+            return Object.assign({}, state, {
+                prevAnswer: action.payload
+            });
         
         case CREATE_NEW_USER_SUCCESS:
             var newState = Object.assign({}, state, {
