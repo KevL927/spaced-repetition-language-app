@@ -20,24 +20,21 @@ var Quiz = React.createClass({
         event.preventDefault();
         var answerFlag = (this.refs.userInput.value.toLowerCase() === this.props.currentAnswer) ? 'correct' : 'incorrect';
         this.props.dispatch(actions.setAnswerFlag(answerFlag));
+        this.props.dispatch(actions.setPrevAnswer(this.props.currentAnswer));
+        this.props.dispatch(actions.postQuestionAnsweredStatus(this.props.currentUserId, answerFlag, this.props.accessToken));
         this.refs.userInput.value ='';
     },
     
     nextButton: function(event){
-        this.submitAnswer(this.props.currentAnswerFlag);
-        this.props.dispatch(actions.setAnswerFlag('null'));
-    },
-    
-   submitAnswer: function (answerFlag) {
-        this.props.dispatch(actions.postQuestionAnsweredStatus(this.props.currentUserId, answerFlag, this.props.accessToken));
+        this.props.dispatch(actions.setCurrentUserInput(null));
+        this.props.dispatch(actions.setAnswerFlag(null));
     },
       
     render: function () {
         if(this.props.currentAnswerFlag == 'incorrect') {
             return (
             <div className="quiz-card">
-            <Question question={this.props.currentQuestion} />
-                    <Answer answer={this.props.currentAnswer} />
+                    <Answer answer={this.props.prevAnswer} />
                     <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton}>Next Question</button>
                     <Result result={this.props.result} />
                     <Count result={this.props.result} />
@@ -49,8 +46,8 @@ var Quiz = React.createClass({
                 <div className="quiz-card">
                         <p>Good Job!!!</p>
                         <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton}>Next Question</button>
-                        <p>Score: {this.props.result+10}</p>
-                        <p>Count: {(this.props.result/10)+1}</p>
+                        <p>Score: {this.props.result}</p>
+                        <p>Count: {this.props.result/10}</p>
                 </div>
             );
         }
@@ -72,13 +69,14 @@ var Quiz = React.createClass({
 
 function mapStateToProps (state, props){
     return {
-        accessToken: state.accessToken,
-        currentUserId:  state.currentUserId,
-        currentAnswer: state.currentAnswer,
+       accessToken: state.accessToken,
+       currentUserId:  state.currentUserId,
        currentUserInput: state.currentUserInput,
        currentQuestion: state.currentQuestion,
-       result: state.result,
-       currentAnswerFlag: state.currentAnswerFlag
+       currentAnswer: state.currentAnswer,
+       currentAnswerFlag: state.currentAnswerFlag,
+       prevAnswer: state.prevAnswer,
+       result: state.result
     };
 }
 
