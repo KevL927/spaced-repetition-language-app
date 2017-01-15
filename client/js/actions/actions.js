@@ -95,17 +95,10 @@ var POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
            currentUserId: userId,
            answerFlag: answerFlag
        })
-     }).then(response => response.json().then(json => ({ json, response })))
-       .then(({json, response}) => {
-            console.log('json',json);
-       if (response.ok === false) {
-         return Promise.reject(json);
-       }
-       return json;
      })
+     .then(response => response.json())
      .then(
        data => {
-          
          dispatch(fetchQuestionSuccess(data))
        },
        ({response, data}) => {
