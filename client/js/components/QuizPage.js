@@ -36,8 +36,9 @@ var Quiz = React.createClass({
         if(this.props.currentAnswerFlag == 'incorrect') {
             return (
             <div className="quiz-card">
+            <Question question={this.props.currentQuestion} />
                     <Answer answer={this.props.currentAnswer} />
-                    <input className ='button' type = "submit" className="next" value="Next Question" name = "next" onClick = {this.nextButton} />
+                    <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton}>Next Question</button>
                     <Result result={this.props.result} />
                     <Count result={this.props.result} />
             </div>
@@ -47,7 +48,7 @@ var Quiz = React.createClass({
             return (
                 <div className="quiz-card">
                         <p>Good Job!!!</p>
-                        <input className ='button' type = "submit" className="next" value="Next Question" name = "next" onClick = {this.nextButton} />
+                        <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton}>Next Question</button>
                         <p>Score: {this.props.result+10}</p>
                         <p>Count: {(this.props.result/10)+1}</p>
                 </div>
