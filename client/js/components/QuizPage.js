@@ -25,39 +25,31 @@ class Quiz extends Component {
     }
     
     nextButton(event) {
+        event.preventDefault();
         this.props.dispatch(actions.setCurrentUserInput(null));
         this.props.dispatch(actions.setAnswerFlag(null));
     }
       
     render() {
-        if(this.props.currentAnswerFlag == 'incorrect') {
+        if(this.props.currentAnswerFlag) {
             return (
                 <div className="quiz-card">
-                    <Answer answer={this.props.prevAnswer} />
-                    <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton.bind(this)}>Next Question</button>
+                    {this.props.currentAnswerFlag === 'correct' ? <p>Good Job!!!</p> : <Answer answer={this.props.prevAnswer} />}
+                    <button className='button' type="submit" name="submit" onClick={this.nextButton.bind(this)} autoFocus={true}>Next Question</button>
                     <Result result={this.props.result} />
                     <Count result={this.props.result} />
                 </div>
             );
-        } 
-        else if(this.props.currentAnswerFlag == 'correct') {
+        } else {
             return (
                 <div className="quiz-card">
-                    <p>Good Job!!!</p>
-                    <button className ='button' type = "submit" className="next" name = "next" onClick = {this.nextButton.bind(this)}>Next Question</button>
+                    <Question question={this.props.currentQuestion}/>
+                    <form onSubmit={this.checkAnswer.bind(this)}>
+                        <input type="text" name="answer" ref="userInput" onChange={this.detectTextInput.bind(this)} autoFocus={true}></input>
+                        <input className='button' type="submit" name="submit" disabled={!this.props.currentUserInput}></input>
+                    </form>
                     <Result result={this.props.result} />
                     <Count result={this.props.result} />
-                </div>
-            );
-        }
-        else {
-            return (
-                <div className="quiz-card">
-                        <Question question={this.props.currentQuestion}/>
-                        <input type = "text" name="answer" ref="userInput" onChange = {this.detectTextInput.bind(this)}></input>
-                        <input className ='button' type = "submit" name="submit" onClick = {this.checkAnswer.bind(this)} disabled = {!this.props.currentUserInput}></input>
-                        <Result result = {this.props.result} />
-                        <Count result = {this.props.result} />
                 </div>
             );
         }
@@ -75,6 +67,6 @@ let mapStateToProps = (state, props) => {
        prevAnswer: state.prevAnswer,
        result: state.result
     };
-}
+};
 
 export default connect(mapStateToProps)(Quiz);
