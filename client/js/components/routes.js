@@ -5,7 +5,7 @@ var Router = router.Router;
 var Route = router.Route;
 var browserHistory = router.browserHistory;
 
-var Quiz = require('./QuizPage');
+import Quiz from './QuizPage';
 var App = require('./App');
 var Profile = require('./Profile');
 
