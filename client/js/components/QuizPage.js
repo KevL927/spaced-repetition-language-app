@@ -4,7 +4,7 @@ var connect = require('react-redux').connect;
 import * as actions from '../actions/actions';
 import Question from './Question';
 import Answer from './Answer';
-var Result = require('./Result');
+import Result from './Result';
 import Count from './Count';
 
 var Quiz = React.createClass({
