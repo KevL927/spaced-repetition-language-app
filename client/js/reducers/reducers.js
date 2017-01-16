@@ -1,34 +1,35 @@
-var actions = require('../actions/actions'),
-    FETCH_QUESTION_SUCCESS = actions.FETCH_QUESTION_SUCCESS,
-    FETCH_QUESTION_ERROR = actions.FETCH_QUESTION_ERROR,
-    POST_QUESTION_ANSWERED_ERROR = actions.POST_QUESTION_ANSWERED_ERROR,
-    SET_PREV_ANSWER = actions.SET_PREV_ANSWER,
-    CREATE_NEW_USER_SUCCESS = actions.CREATE_NEW_USER_SUCCESS,
-    CREATE_NEW_USER_ERROR = actions.CREATE_NEW_USER_ERROR,
-    SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT,
-    USER_LOGOUT = actions.USER_LOGOUT,
-    SET_ANSWER_FLAG = actions.SET_ANSWER_FLAG,
-    SET_LAST_ANSWER_FLAG = actions.SET_LAST_ANSWER_FLAG;
+import * as actions from '../actions/actions';
 
-var initialState = {
-    currentQuestion: null,
-    currentAnswer: null,
-    prevAnswer: null,
-    fetchGetQuestionError: null,
-    postQuestionStatusError: null,
-    isAuthenticated: false,
-    createNewUserError: null,
-    currentAnswerFlag: null,
-     lastAnswerFlag:null,
-    currentUserId: null,
-    currentUserName: null,
-    currentUserInput: null,
-    accessToken: null,
-    result: 0,
-}
+const FETCH_QUESTION_SUCCESS = actions.FETCH_QUESTION_SUCCESS,
+      FETCH_QUESTION_ERROR = actions.FETCH_QUESTION_ERROR,
+      POST_QUESTION_ANSWERED_ERROR = actions.POST_QUESTION_ANSWERED_ERROR,
+      SET_PREV_ANSWER = actions.SET_PREV_ANSWER,
+      CREATE_NEW_USER_SUCCESS = actions.CREATE_NEW_USER_SUCCESS,
+      CREATE_NEW_USER_ERROR = actions.CREATE_NEW_USER_ERROR,
+      SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT,
+      USER_LOGOUT = actions.USER_LOGOUT,
+      SET_ANSWER_FLAG = actions.SET_ANSWER_FLAG,
+      SET_LAST_ANSWER_FLAG = actions.SET_LAST_ANSWER_FLAG;
+
+const initialState = {
+      currentQuestion: null,
+      currentAnswer: null,
+      prevAnswer: null,
+      fetchGetQuestionError: null,
+      postQuestionStatusError: null,
+      isAuthenticated: false,
+      createNewUserError: null,
+      currentAnswerFlag: null,
+      lastAnswerFlag:null,
+      currentUserId: null,
+      currentUserName: null,
+      currentUserInput: null,
+      accessToken: null,
+      result: 0,
+};
 
 
-function frenchXReducer (state, action) {
+let frenchXReducer = (state, action) => {
    state = state || initialState;  
    
     switch(action.type) {
