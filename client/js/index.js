@@ -6,7 +6,7 @@ var applyMiddleware = redux.applyMiddleware;
 var Provider = require('react-redux').Provider;
 var thunk = require('redux-thunk').default;
 
-var actions = require('./actions/actions');
+import * as actions from './actions/actions';
 var reducers = require('./reducers/reducers').frenchXReducer;
 var routes = require('./components/routes');
 
