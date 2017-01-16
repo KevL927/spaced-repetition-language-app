@@ -29,29 +29,26 @@ const initialState = {
 };
 
 
-let frenchXReducer = (state, action) => {
+export let frenchXReducer = (state, action) => {
    state = state || initialState;  
    
     switch(action.type) {
         case FETCH_QUESTION_SUCCESS:
-             var newState = Object.assign({}, state, {
+            return Object.assign({}, state, {
                 currentQuestion: action.payload.questionObject.question,
                 currentAnswer: action.payload.questionObject.answer,
                 result: action.payload.result
             });
-            return newState;
         
         case FETCH_QUESTION_ERROR:
-            var newState = Object.assign({}, state, {
+            return Object.assign({}, state, {
                 fetchGetQuestionError: action.payload
             });
-            return newState;
         
         case POST_QUESTION_ANSWERED_ERROR:
-            var newState = Object.assign({}, state, {
+            return Object.assign({}, state, {
                 postQuestionAnsweredError: action.payload
             });
-            return newState;
             
         case SET_PREV_ANSWER:
             return Object.assign({}, state, {
@@ -59,41 +56,33 @@ let frenchXReducer = (state, action) => {
             });
         
         case CREATE_NEW_USER_SUCCESS:
-            var newState = Object.assign({}, state, {
+            return Object.assign({}, state, {
                 accessToken: action.accessToken,
                 currentUserId: action.currentUserId,
                 currentUserName: action.currentUserName,
                 isAuthenticated: true
             });
-            return newState;
         
         case CREATE_NEW_USER_ERROR:
-            var newState = Object.assign({}, state, {
+            return Object.assign({}, state, {
                 createNewUserError: action.payload
             });
-            return newState;
             
         case SET_CURRENT_USER_INPUT:
-           var newState = Object.assign({}, state, {
+            return Object.assign({}, state, {
                 currentUserInput: action.payload
             });
-            return newState;
         
         case USER_LOGOUT:
-            var newState =  Object.assign({}, state, initialState)
-            return newState;
+            return Object.assign({}, state, initialState);
             
         case SET_ANSWER_FLAG:
-            var newState =  Object.assign({}, state, {currentAnswerFlag : action.payload})
-            return newState;
+            return Object.assign({}, state, {currentAnswerFlag : action.payload});
             
         case SET_LAST_ANSWER_FLAG:
-            var newState =  Object.assign({}, state, {lastAnswerFlag : action.payload})
-            return newState;
+            return Object.assign({}, state, {lastAnswerFlag : action.payload});
         
         default:
             return state;
     }
-}
-
-exports.frenchXReducer = frenchXReducer;
+};

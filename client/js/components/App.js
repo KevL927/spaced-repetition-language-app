@@ -6,9 +6,7 @@ var Router = router.Router;
 var Route = router.Route;
 var hashHistory = router.hashHistory;
 var Link = require('react-router').Link;
-
-var createNewUserSuccess = require('../actions/actions').createNewUserSuccess;
-var userLogout = require('../actions/actions').userLogout;
+import * as actions from '../actions/actions';
 
 var App = React.createClass({
     
@@ -16,12 +14,13 @@ var App = React.createClass({
         var access_token = this.props.location.query.access_token, 
             userId = this.props.location.query.userId, 
             userName = this.props.location.query.userName;
-            this.props.retrieveUserInfo(access_token, userId, userName);
-
+            // this.props.retrieveUserInfo(access_token, userId, userName);
+            this.props.dispatch(actions.createNewUserSuccess(access_token, userId, userName))
     },
     
     logout: function() {
-        this.props.logOutUser();
+        // this.props.logOutUser();
+        this.props.dispatch(actions.userLogout());
        this.context.router.push('/');
     },
     
@@ -62,15 +61,15 @@ function mapStateToProps (state) {
     };
 }
 
-function mapDispatchToProps (dispatch) {
-    return {
-        retrieveUserInfo: function(access_token, userId, userName) {
-            dispatch(createNewUserSuccess(access_token, userId, userName));
-        },
-        logOutUser: function () {
-            dispatch(userLogout());
-        }
-    };
-}
+// function mapDispatchToProps (dispatch) {
+//     return {
+//         retrieveUserInfo: function(access_token, userId, userName) {
+//             dispatch(createNewUserSuccess(access_token, userId, userName));
+//         },
+//         logOutUser: function () {
+//             dispatch(userLogout());
+//         }
+//     };
+// }
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(App);
+module.exports = connect(mapStateToProps)(App);
