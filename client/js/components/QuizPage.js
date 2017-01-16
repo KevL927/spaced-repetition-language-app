@@ -1,10 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var connect = require('react-redux').connect;
-// var actions = require('../actions/actions');
 import * as actions from '../actions/actions';
-var Question = require('./Question');
-// var Answer = require('./Answer');
+import Question from './Question';
 import Answer from './Answer';
 var Result = require('./Result');
 import Count from './Count';
