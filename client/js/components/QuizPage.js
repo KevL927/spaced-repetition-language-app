@@ -7,7 +7,7 @@ var Question = require('./Question');
 // var Answer = require('./Answer');
 import Answer from './Answer';
 var Result = require('./Result');
-var Count = require('./Count');
+import Count from './Count';
 
 var Quiz = React.createClass({
     componentWillMount: function() {
