@@ -1,10 +1,7 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
 
-var Result = function(props){
-    return(
-    <div className='result'>Score : {props.result} </div>
+export default props => {
+    return (
+        <div className='result'>Score : {props.result}</div>
     );
-}
-
-module.exports = Result;
+};
