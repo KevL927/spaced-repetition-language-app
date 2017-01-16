@@ -4,7 +4,8 @@ var connect = require('react-redux').connect;
 // var actions = require('../actions/actions');
 import * as actions from '../actions/actions';
 var Question = require('./Question');
-var Answer = require('./Answer');
+// var Answer = require('./Answer');
+import Answer from './Answer';
 var Result = require('./Result');
 var Count = require('./Count');
 

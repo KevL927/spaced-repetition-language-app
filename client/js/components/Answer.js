@@ -1,12 +1,9 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
 
-var Feedback = function (props) {
-        return (
-            <div className="feedback">
-                The correct answer is {props.answer} 
-            </div>
-        );
-    };
-
-module.exports = Feedback;
+export default props => {
+    return (
+        <div className="feedback">
+            The correct answer is {props.answer} 
+        </div>
+    );
+};
