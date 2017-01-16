@@ -1,10 +1,7 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
 
-var Count = function(props){
-    return(
-    <div>Correctly Answered Questions: {(props.result/10)} </div>
+export default props => {
+    return (
+        <div>Correctly Answered Questions: {(props.result/10)} </div>
     );
-}
-
-module.exports = Count;
+};
