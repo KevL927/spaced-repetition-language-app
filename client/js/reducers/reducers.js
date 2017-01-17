@@ -7,9 +7,9 @@ const FETCH_QUESTION_SUCCESS = actions.FETCH_QUESTION_SUCCESS,
       CREATE_NEW_USER_SUCCESS = actions.CREATE_NEW_USER_SUCCESS,
       CREATE_NEW_USER_ERROR = actions.CREATE_NEW_USER_ERROR,
       SET_CURRENT_USER_INPUT = actions.SET_CURRENT_USER_INPUT,
-      USER_LOGOUT = actions.USER_LOGOUT,
       SET_ANSWER_FLAG = actions.SET_ANSWER_FLAG,
-      SET_LAST_ANSWER_FLAG = actions.SET_LAST_ANSWER_FLAG;
+      SET_LAST_ANSWER_FLAG = actions.SET_LAST_ANSWER_FLAG,
+      USER_LOGOUT = actions.USER_LOGOUT;
 
 const initialState = {
       currentQuestion: null,
@@ -77,10 +77,14 @@ export default (state, action) => {
             return Object.assign({}, state, initialState);
             
         case SET_ANSWER_FLAG:
-            return Object.assign({}, state, {currentAnswerFlag : action.payload});
+            return Object.assign({}, state, {
+                currentAnswerFlag : action.payload
+            });
             
         case SET_LAST_ANSWER_FLAG:
-            return Object.assign({}, state, {lastAnswerFlag : action.payload});
+            return Object.assign({}, state, {
+                lastAnswerFlag : action.payload
+            });
         
         default:
             return state;
