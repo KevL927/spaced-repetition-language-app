@@ -10,7 +10,7 @@ import * as actions from './actions/actions';
 var reducers = require('./reducers/reducers').frenchXReducer;
 var routes = require('./components/routes');
 
-var App = require('./components/App');
+import App from './components/App';
 
 var store = createStore(reducers, applyMiddleware(thunk));
 
