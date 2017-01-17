@@ -1,28 +1,21 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var redux = require('redux');
-var createStore = redux.createStore;
-var applyMiddleware = redux.applyMiddleware;
-var Provider = require('react-redux').Provider;
-var thunk = require('redux-thunk').default;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-import * as actions from './actions/actions';
 import reducers from './reducers/reducers';
 import routes from './components/routes';
 
-import App from './components/App';
-
-var store = createStore(reducers, applyMiddleware(thunk));
+export const store = createStore(reducers, applyMiddleware(thunk));
 
 document.addEventListener('DOMContentLoaded', function() {
     ReactDOM.render(
-    <Provider store={store}>
-        {routes}
-    </Provider>,
-    document.getElementById('app')
-    )
+        <Provider store={store}>
+            {routes}
+        </Provider>,
+        document.getElementById('app')
+    );
 });
 
 console.log(`Client running in ${process.env.NODE_ENV} mode`);
-
-exports.store = store;
