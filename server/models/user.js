@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var UserSchema = new mongoose.Schema({
+let UserSchema = new mongoose.Schema({
     userGoogleToken: {
         type: String,
         required: true
@@ -29,6 +29,4 @@ var UserSchema = new mongoose.Schema({
     }
 });
 
-var User = mongoose.model('User', UserSchema);
-
-module.exports = User;
+export default mongoose.model('User', UserSchema);

@@ -7,10 +7,10 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
-var User = require('./models/user');
-var Questions = require('./models/question');
+import User from './models/user';
+import Questions from './models/question';
 var sortQuestion = require('./set-question-order/sort_by_space_repetition');
-var questionFactory = require('./set-question-order/question_factory');
+import questionFactory from './set-question-order/question_factory';
 
 var secrets;
     if (!process.env.CLIENT_ID) secrets = require('./config/client_secret');
