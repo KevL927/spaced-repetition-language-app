@@ -29,7 +29,7 @@ const initialState = {
 };
 
 
-export let frenchXReducer = (state, action) => {
+export default (state, action) => {
    state = state || initialState;  
    
     switch(action.type) {
