@@ -1,5 +1,4 @@
-function questionFactory () {
-
+export default () => {
 	return [
 					{questionId:'58252585b8a4a557c954ccc2', weight:1},
 					{questionId:'5825258db8a4a557c954ccc3', weight:1},
@@ -12,7 +11,4 @@ function questionFactory () {
 					{questionId:'5825264ab8a4a557c954ccca', weight:1},
 					{questionId:'5825268db8a4a557c954cccb', weight:1}
 			];
-	
 }
-
-module.exports = questionFactory;
