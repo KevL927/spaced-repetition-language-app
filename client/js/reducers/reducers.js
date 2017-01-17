@@ -25,7 +25,7 @@ const initialState = {
       currentUserName: null,
       currentUserInput: null,
       accessToken: null,
-      result: 0,
+      result: 0
 };
 
 
