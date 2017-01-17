@@ -8,7 +8,7 @@ var thunk = require('redux-thunk').default;
 
 import * as actions from './actions/actions';
 var reducers = require('./reducers/reducers').frenchXReducer;
-var routes = require('./components/routes');
+import routes from './components/routes';
 
 import App from './components/App';
 

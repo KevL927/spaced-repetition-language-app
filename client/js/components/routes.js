@@ -1,21 +1,13 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var router = require('react-router');
-var Router = router.Router;
-var Route = router.Route;
-var browserHistory = router.browserHistory;
-
+import React from 'react';
+import { browserHistory, Route, Router } from 'react-router';
 import Quiz from './QuizPage';
 import App from './App';
-var Profile = require('./Profile');
+import Profile from './Profile';
 
-
-var routes = (
+export default (
     <Router history={browserHistory} >
         <Route path="/" component={App} />
         <Route path="/profile" component= {Profile} />
         <Route path="/quiz" component= {Quiz} />
     </Router>
 );
-    
-module.exports = routes;
