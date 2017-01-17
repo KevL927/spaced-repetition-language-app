@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var QuestionSchema = new mongoose.Schema({
+let QuestionSchema = new mongoose.Schema({
     question: {
         type: String,
         required: true
@@ -11,6 +11,4 @@ var QuestionSchema = new mongoose.Schema({
     }
 });
 
-var Questions = mongoose.model('Questions', QuestionSchema);
-
-module.exports = Questions;
+export default mongoose.model('Questions', QuestionSchema);
