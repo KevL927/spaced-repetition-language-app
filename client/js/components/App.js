@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { hashHistory, Link } from 'react-router';
 import * as actions from '../actions/actions';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
     
     logout() {
         this.props.dispatch(actions.userLogout());
-        this.context.router.push('/');
+        hashHistory.push('/');
     }
     
     renderGuestOrAuthenticatedUserText() {
@@ -23,7 +23,7 @@ class App extends Component {
         return (
             <div>
                 <h2>Welcome, {this.props.currentUserName}!</h2>
-                <a href="#" onClick={this.logout}>Logout</a><br/>
+                <a href="#" onClick={this.logout.bind(this)}>Logout</a><br/>
                 <Link to = "/quiz">Ready to French it up?</Link>
             </div>
         );
