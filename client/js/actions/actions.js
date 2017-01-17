@@ -166,8 +166,8 @@ exports.createNewUserError = createNewUserError;
 exports.SET_CURRENT_USER_INPUT = SET_CURRENT_USER_INPUT;
 exports.setCurrentUserInput = setCurrentUserInput;
 
-exports.userLogout = userLogout;
 exports.USER_LOGOUT = USER_LOGOUT;
+exports.userLogout = userLogout;
 
 exports.SET_ANSWER_FLAG = SET_ANSWER_FLAG;
 exports.setAnswerFlag = setAnswerFlag;
