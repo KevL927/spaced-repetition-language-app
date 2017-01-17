@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-let UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     userGoogleToken: {
         type: String,
         required: true

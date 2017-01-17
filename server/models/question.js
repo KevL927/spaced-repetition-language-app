@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-let QuestionSchema = new mongoose.Schema({
+const QuestionSchema = new mongoose.Schema({
     question: {
         type: String,
         required: true
