@@ -22,7 +22,7 @@ app.use(passport.session());
 app.use('/auth/google', googleRoute);
 app.use('/', questionRoute);
 
-const runServer = (callback) => {
+const runServer = callback => {
     let databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/frenchX';
     mongoose
         .connect(databaseUri)
