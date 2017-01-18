@@ -103,4 +103,4 @@ questionRoute.post('/createQuestion', (req, res) => {
     });
 });
 
-export default questionRoute
+export default questionRoute;
