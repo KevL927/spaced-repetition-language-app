@@ -34,7 +34,7 @@ class Quiz extends Component {
         if(this.props.currentAnswerFlag) {
             return (
                 <div>
-                    {this.props.currentAnswerFlag === 'correct' ? <p>Good Job!!!</p> : <Answer answer={this.props.prevAnswer} />}
+                    {this.props.currentAnswerFlag === 'correct' ? <p id="compliment">Good Job!!!</p> : <Answer answer={this.props.prevAnswer} />}
                     <button className='button' type="submit" name="submit" onClick={this.nextButton.bind(this)} autoFocus={true}>
                         Next Question
                     </button>
