@@ -18,7 +18,7 @@ class App extends Component {
     
     renderGuestOrAuthenticatedUserText() {
         if(!this.props.currentUserName){
-            return <a href="/auth/google"><img src="../../assets/thegoogle.png" /></a>;
+            return <a href="/auth/google"><div id="google-signin-button"></div></a>;
         }
         return (
             <div>
@@ -31,9 +31,9 @@ class App extends Component {
     
     render(props) {
         return (
-            <div className="welcome-page">
-                <h1>FrenchX</h1><br/>
-                <h3>Learn Languages Through Spaced Repetition</h3><br/>
+            <div id="welcome-page">
+                <p id="title">French-X</p><br/>
+                <p id="subtitle">Learn French Using Space Repetition</p><br/>
                 {this.renderGuestOrAuthenticatedUserText()}
             </div>
         );
