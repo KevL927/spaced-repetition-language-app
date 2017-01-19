@@ -22,7 +22,7 @@ class App extends Component {
         }
         return (
             <div>
-                <h2>Welcome, {this.props.currentUserName}!</h2>
+                <h2>Welcome, {this.props.currentUserName.toUpperCase()}!</h2>
                 <a href="#" onClick={this.logout}>Logout</a><br/>
                 <Link to = "/quiz">Ready to French it up?</Link>
             </div>
