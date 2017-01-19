@@ -33,7 +33,7 @@ class App extends Component {
         return (
             <div id="welcome-page">
                 <p id="title">French-X</p><br/>
-                <p id="subtitle">Learn French Using Space Repetition</p><br/>
+                <p id="subtitle">Learn French Using Spaced Repetition</p><br/>
                 {this.renderGuestOrAuthenticatedUserText()}
             </div>
         );
