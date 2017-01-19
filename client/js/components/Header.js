@@ -12,7 +12,7 @@ class Quiz extends Component {
     
     renderLogoutButton() {
         if (this.props.currentUserId) {
-            return <div><a className="link sign-out" href="#" onClick={this.logout.bind(this)}><i className="fa fa-sign-out fa-1x" aria-hidden="true"></i>Logout</a></div>;
+            return <div id="sign-out-button"><a className="link sign-out" href="#" onClick={this.logout.bind(this)}><i className="fa fa-sign-out fa-1x" aria-hidden="true"></i>Logout</a></div>;
         } else {
             return <div className="filler"></div>;
         }
