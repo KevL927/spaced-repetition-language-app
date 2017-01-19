@@ -38,6 +38,7 @@ body {
 
 #sign-out-button {
     position: fixed;
+    padding: 20px;
     top: 0;
     right: 0;
 }
@@ -74,10 +75,27 @@ body {
     margin-top: 100px;
 }
 
-#question {
+#question, #compliment {
     padding: 10px;
-    background-color: #afb9c9;
     font-size: 40px;
+}
+
+#question {
+    background-color: #afb9c9;
+}
+
+#feedback {
+    position: relative;
+    padding: 10px;
+    font-size: 32px;
+    
+    p:nth-child(1) {
+        margin-top: 0;
+    }
+    p:nth-child(2) {
+        background-color: #ECA191;
+    }
+    
 }
 
 #input-answer {
@@ -89,12 +107,21 @@ body {
     border: 1px black solid;
 }
 
-#submit-button {
-    margin-left: 4px;
-    width: 50px;
-    height: 24px;
+#submit-button, #next-question-button {
     color: white;
     background-color: #4268f4;
+    font-size: 24px;
+}
+
+#submit-button {
+    margin-left: 4px;
+    width: 88px;
+    height: 34px;
+}
+
+#next-question-button {
+    width: 120px;
+    height: 70px;
 }
 
 #question-form {

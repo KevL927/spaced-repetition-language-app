@@ -2,8 +2,9 @@ import React from 'react';
 
 export default props => {
     return (
-        <div className="feedback">
-            The correct answer is {props.answer} 
+        <div id="feedback">
+            <p>The correct answer is:</p>
+            <p>{props.answer.toUpperCase()}</p>
         </div>
     );
 };
