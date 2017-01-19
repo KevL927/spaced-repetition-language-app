@@ -16,8 +16,8 @@ class App extends Component {
             return <a href="/auth/google"><div id="google-signin-button"></div></a>;
         }
         return (
-            <div>
-                <h2>Welcome, {this.props.currentUserName.toUpperCase()}!</h2>
+            <div id="welcome-text">
+                <p>Welcome, {this.props.currentUserName.toUpperCase()}!</p>
                 <Link to = "/quiz" className="link start-button">Start French'en Now!</Link>
             </div>
         );
