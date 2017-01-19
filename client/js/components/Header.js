@@ -27,7 +27,7 @@ class Quiz extends Component {
             </div>
         );
     }
-}
+}  
 
 let mapStateToProps = state => {
     return {
