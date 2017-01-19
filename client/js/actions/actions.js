@@ -1,7 +1,7 @@
 var fetch = require('isomorphic-fetch');
 
 const CREATE_NEW_USER = 'CREATE_NEW_USER';
-let createNewUser = () => {
+const createNewUser = () => {
     return (dispatch) => {
         return fetch(
                     '/createUser', 
@@ -20,7 +20,7 @@ let createNewUser = () => {
 };
 
 const CREATE_NEW_USER_SUCCESS = 'CREATE_NEW_USER_SUCCESS';
-let createNewUserSuccess = (accessToken, userId, userName) => {
+const createNewUserSuccess = (accessToken, userId, userName) => {
     return {
         type: CREATE_NEW_USER_SUCCESS,
         accessToken: accessToken,
@@ -30,7 +30,7 @@ let createNewUserSuccess = (accessToken, userId, userName) => {
 };
 
 const CREATE_NEW_USER_ERROR = 'CREATE_NEW_USER_ERROR';
-let createNewUserError = error => {
+const createNewUserError = error => {
     return {
         type: CREATE_NEW_USER_ERROR,
         payload: error
@@ -38,14 +38,14 @@ let createNewUserError = error => {
 };
 
 const USER_LOGOUT = "USER_LOGOUT";
-let userLogout = () => {
+const userLogout = () => {
     return {
         type: USER_LOGOUT
     };
 };
 
 const FETCH_QUESTION = 'FETCH_QUESTION';
-let fetchQuestion = (currentUserId, accessToken) => {
+const fetchQuestion = (currentUserId, accessToken) => {
     return dispatch => {
         return fetch('/question/' + currentUserId + '?access_token=' + accessToken)
                 .then(res => {
@@ -59,7 +59,7 @@ let fetchQuestion = (currentUserId, accessToken) => {
 };
 
 const FETCH_QUESTION_SUCCESS = 'FETCH_QUESTION_SUCCESS';
-let fetchQuestionSuccess = questionObject => {
+const fetchQuestionSuccess = questionObject => {
     return {
         type: FETCH_QUESTION_SUCCESS,
         payload: questionObject
@@ -67,7 +67,7 @@ let fetchQuestionSuccess = questionObject => {
 };
 
 const FETCH_QUESTION_ERROR = 'FETCH_QUESTION_ERROR';
-let fetchQuestionError = error => {
+const fetchQuestionError = error => {
     return {
         type: FETCH_QUESTION_ERROR,
         payload: error
@@ -75,7 +75,7 @@ let fetchQuestionError = error => {
 };
 
 const POST_QUESTION_ANSWERED_STATUS = "POST_QUESTION_ANSWERED_STATUS";
-let postQuestionAnsweredStatus = (userId, answerFlag, accessToken) => {
+const postQuestionAnsweredStatus = (userId, answerFlag, accessToken) => {
     return (dispatch) => {
         return fetch('/app/v1/question?access_token=' + accessToken, {
             method: 'POST',
@@ -100,7 +100,7 @@ let postQuestionAnsweredStatus = (userId, answerFlag, accessToken) => {
 };
 
 const POST_QUESTION_ANSWERED_ERROR = "POST_QUESTION_ANSWERED_ERROR";
-let postQuestionAnsweredError = error => {
+const postQuestionAnsweredError = error => {
         return {
             type: FETCH_QUESTION_ERROR,
             payload: error
@@ -108,7 +108,7 @@ let postQuestionAnsweredError = error => {
 };
 
 const SET_PREV_ANSWER = "SET_PREV_ANSWER";
-let setPrevAnswer = currentAnswer => {
+const setPrevAnswer = currentAnswer => {
     return {
         type: SET_PREV_ANSWER,
         payload: currentAnswer
@@ -116,7 +116,7 @@ let setPrevAnswer = currentAnswer => {
 };
 
 const SET_CURRENT_USER_INPUT = 'SET_CURRENT_USER_INPUT';
-let setCurrentUserInput = currentUserInput => {
+const setCurrentUserInput = currentUserInput => {
     return {
         type: SET_CURRENT_USER_INPUT,
         payload: currentUserInput
@@ -124,7 +124,7 @@ let setCurrentUserInput = currentUserInput => {
 };
 
 const SET_ANSWER_FLAG = "SET_ANSWER_FLAG";
-let setAnswerFlag = answerFlag => {
+const setAnswerFlag = answerFlag => {
     return {
         type: SET_ANSWER_FLAG,
         payload: answerFlag
@@ -132,7 +132,7 @@ let setAnswerFlag = answerFlag => {
 };
 
 const SET_LAST_ANSWER_FLAG = "SET_LAST_ANSWER_FLAG";
-let setLastAnswerFlag = lastAnswerFlag => {
+const setLastAnswerFlag = lastAnswerFlag => {
     return {
         type: SET_LAST_ANSWER_FLAG,
         payload: lastAnswerFlag
@@ -166,8 +166,8 @@ exports.createNewUserError = createNewUserError;
 exports.SET_CURRENT_USER_INPUT = SET_CURRENT_USER_INPUT;
 exports.setCurrentUserInput = setCurrentUserInput;
 
-exports.userLogout = userLogout;
 exports.USER_LOGOUT = USER_LOGOUT;
+exports.userLogout = userLogout;
 
 exports.SET_ANSWER_FLAG = SET_ANSWER_FLAG;
 exports.setAnswerFlag = setAnswerFlag;

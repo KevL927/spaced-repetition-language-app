@@ -30,29 +30,36 @@ class Quiz extends Component {
         this.props.dispatch(actions.setAnswerFlag(null));
     }
       
-    render() {
+    renderQuestionOrResult() {
         if(this.props.currentAnswerFlag) {
             return (
-                <div className="quiz-card">
+                <div>
                     {this.props.currentAnswerFlag === 'correct' ? <p>Good Job!!!</p> : <Answer answer={this.props.prevAnswer} />}
-                    <button className='button' type="submit" name="submit" onClick={this.nextButton.bind(this)} autoFocus={true}>Next Question</button>
-                    <Result result={this.props.result} />
-                    <Count result={this.props.result} />
-                </div>
-            );
-        } else {
-            return (
-                <div className="quiz-card">
-                    <Question question={this.props.currentQuestion}/>
-                    <form onSubmit={this.checkAnswer.bind(this)}>
-                        <input type="text" name="answer" ref="userInput" onChange={this.detectTextInput.bind(this)} autoFocus={true}></input>
-                        <input className='button' type="submit" name="submit" disabled={!this.props.currentUserInput}></input>
-                    </form>
-                    <Result result={this.props.result} />
-                    <Count result={this.props.result} />
+                    <button className='button' type="submit" name="submit" onClick={this.nextButton.bind(this)} autoFocus={true}>
+                        Next Question
+                    </button>
                 </div>
             );
         }
+        return (
+            <div>
+                <Question question={this.props.currentQuestion}/>
+                <form onSubmit={this.checkAnswer.bind(this)}>
+                    <input type="text" name="answer" ref="userInput" onChange={this.detectTextInput.bind(this)} autoFocus={true}></input>
+                    <input className='button' type="submit" name="submit" disabled={!this.props.currentUserInput}></input>
+                </form>
+            </div>
+        );
+    }
+    
+    render() {
+        return (
+            <div className="quiz-card">
+                {this.renderQuestionOrResult()}
+                <Result result={this.props.result} />
+                <Count result={this.props.result} />
+            </div>
+        );
     }
 }
 

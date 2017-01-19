@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { hashHistory, Link } from 'react-router';
 import * as actions from '../actions/actions';
 
 class App extends Component {
@@ -13,12 +13,12 @@ class App extends Component {
     
     logout() {
         this.props.dispatch(actions.userLogout());
-        this.context.router.push('/');
+        hashHistory.push('/');
     }
     
     renderGuestOrAuthenticatedUserText() {
         if(!this.props.currentUserName){
-            return <a href="/auth/google"><img src="../../assets/thegoogle.png" /></a>;
+            return <a href="/auth/google"><div id="google-signin-button"></div></a>;
         }
         return (
             <div>
@@ -31,9 +31,9 @@ class App extends Component {
     
     render(props) {
         return (
-            <div className="welcome-page">
-                <h1>FrenchX</h1><br/>
-                <h3>Learn Languages Through Spaced Repetition</h3><br/>
+            <div id="welcome-page">
+                <p id="title">French-X</p><br/>
+                <p id="subtitle">Learn French Using Spaced Repetition</p><br/>
                 {this.renderGuestOrAuthenticatedUserText()}
             </div>
         );

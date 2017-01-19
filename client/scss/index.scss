@@ -1,71 +1,45 @@
-html{
-  font-family: 'Roboto', sans-serif;
-  color: white;
-}
-
 body {
-  background: #3f51b5;
-  width: 100%;
-  margin: 0;
-
-}
-
-h1 {
-  width: auto;
-  height:40px;
-  background: #303f9f;
-  color: white;
-  font-size: 30px;
-  margin-top:2px;
-}
-
-
-h3 {
-  color: white;
-  text-align: center;
-  font-size: 25px;
-}
-
-.g-signin2 {
- float: right;
-
-}
-
-input{
-  padding: 10px;
-  border: solid 1px #dcdcdc;
-  transition: box-shadow 0.3s, border 0.3s;
-  color:#311B92;
-  background-color: white;
-      margin: 18px;
-  
-}
-
-.button{
-    background-color: #311B92;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    padding: 12px 31px;
+    background-image: url("../../assets/paris-background.jpeg");
+    -webkit-background-size: auto 90%;
+    -moz-background-size: auto 90%;
+    -o-background-size: auto 90%;
+    background-size: auto 90%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center right; 
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 11px;
 }
 
-.quiz-card{
-  text-align: center;
-      padding-top: 24rem;
-  
+#title, #subtitle {
+    font-family: 'Merriweather', serif;
 }
 
-div{
-  text-align: center;
-  
+#title {
+    margin: 50px auto 10px;
+    font-size: 50px;
 }
 
-.question{
-  font-size: 30 px;
-  
-  
+#subtitle {
+    margin: 10px;
+    font-size: 20px;
+}
+
+#google-signin-button {
+    margin: 140px auto 0;
+    background-image: url("../../assets/google-signin-button/sprites.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 320px;
+    width: 190px;
+    height: 44px;
+}
+
+#google-signin-button:hover {
+    background-position: 0 -45px;
+    height: 48px;
+}
+
+#google-signin-button:active {
+    background-position: 0 -91px;
+    height: 44px;
 }
