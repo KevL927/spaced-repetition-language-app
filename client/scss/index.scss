@@ -1,22 +1,30 @@
-body {
-    background-image: url("../../assets/paris-background.jpeg");
-    -webkit-background-size: auto 90%;
-    -moz-background-size: auto 90%;
-    -o-background-size: auto 90%;
-    background-size: auto 90%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center right; 
-    text-align: center;
-}
-
-#title, #subtitle {
+html {
+    height: 100vh;
     font-family: 'Merriweather', serif;
 }
 
+body {
+    background-image: url("../../assets/paris-background.jpeg");
+    -webkit-background-size: auto 60%;
+    -moz-background-size: auto 60%;
+    -o-background-size: auto 60%;
+    background-size: auto 60%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom; 
+    text-align: center;
+    position: relative
+}
+
+#title, #subtitle {
+    padding: 2px;
+    background-color: white;
+}
+
 #title {
-    margin: 50px auto 10px;
+    margin-bottom: 10px;
     font-size: 50px;
+    color: #4268f4;
 }
 
 #subtitle {
@@ -43,3 +51,29 @@ body {
     background-position: 0 -91px;
     height: 44px;
 }
+
+#current-question {
+    background-color: #afb9c9;
+    // opacity: 0.5;
+}
+
+.filler {
+    width: 75.48px;
+    height: 20px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.fa-sign-out {
+    margin-right: 4px;
+}
+
+.start-button {
+    font-size: 30px;
+}  

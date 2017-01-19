@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory, Link } from 'react-router';
+import { Link } from 'react-router';
 import * as actions from '../actions/actions';
 
 class App extends Component {
@@ -11,11 +11,6 @@ class App extends Component {
             this.props.dispatch(actions.createNewUserSuccess(access_token, userId, userName));
     }
     
-    logout() {
-        this.props.dispatch(actions.userLogout());
-        browserHistory.push('/');
-    }
-    
     renderGuestOrAuthenticatedUserText() {
         if(!this.props.currentUserName){
             return <a href="/auth/google"><div id="google-signin-button"></div></a>;
@@ -23,18 +18,18 @@ class App extends Component {
         return (
             <div>
                 <h2>Welcome, {this.props.currentUserName.toUpperCase()}!</h2>
-                <a className="link sign-out" href="#" onClick={this.logout.bind(this)}><i className="fa fa-sign-out fa-1x" aria-hidden="true"></i>Logout</a><br/>
                 <Link to = "/quiz" className="link start-button">Start French'en Now!</Link>
             </div>
         );
     }
     
-    render(props) {
+    render() {
         return (
-            <div id="welcome-page">
-                <p id="title">French-X</p><br/>
+            <div>
+                <div id="welcome-page">
                 <p id="subtitle">Learn French Using Spaced Repetition</p><br/>
                 {this.renderGuestOrAuthenticatedUserText()}
+            </div>
             </div>
         );
     }
@@ -52,4 +47,4 @@ let mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App);  

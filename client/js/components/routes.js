@@ -1,13 +1,14 @@
 import React from 'react';
-import { browserHistory, Route, Router } from 'react-router';
+import { browserHistory, IndexRoute, Route, Router } from 'react-router';
+import Header from './Header';
 import Quiz from './QuizPage';
 import App from './App';
-import Profile from './Profile';
 
 export default (
     <Router history={browserHistory} >
-        <Route path="/" component={App} />
-        <Route path="/profile" component= {Profile} />
-        <Route path="/quiz" component= {Quiz} />
+        <Route path="/" component={Header}>
+            <IndexRoute component={App} />
+            <Route path="quiz" component= {Quiz} />
+        </Route>
     </Router>
 );
