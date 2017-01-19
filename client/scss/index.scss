@@ -28,7 +28,7 @@ body {
 
 #subtitle {
     margin: 10px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #google-signin-button {
@@ -75,6 +75,7 @@ body {
     height: 30px;
     font-size: 28px;
     text-align: center;
+    border: 1px black solid;
 }
 
 #submit-button {
@@ -119,4 +120,26 @@ body {
 
 .start-button {
     font-size: 22px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    #title { font-size: 80px; }
+    #subtitle { font-size: 30px; }
+    body {
+        background-image: url("../../assets/paris-background.jpeg");
+        -webkit-background-size: auto 90%;
+        -moz-background-size: auto 90%;
+        -o-background-size: auto 90%;
+        background-size: auto 90%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: right; 
+    }
+    #welcome-text {
+        p {
+            font-size: 30px;
+        }
+    }
+    .start-button { font-size: 26px; }
 }
