@@ -7,25 +7,25 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center right; 
+    text-align: center;
 }
 
 #title, #subtitle {
     font-family: 'Merriweather', serif;
-    text-align: center;
 }
 
 #title {
     margin: 50px auto 10px;
-    font-size: 80px;
+    font-size: 50px;
 }
 
 #subtitle {
-    margin-top: 10px;
-    font-size: 30px;
+    margin: 10px;
+    font-size: 20px;
 }
 
 #google-signin-button {
-    margin: 0 auto;
+    margin: 140px auto 0;
     background-image: url("../../assets/google-signin-button/sprites.png");
     background-position: 0 0;
     background-repeat: no-repeat;
