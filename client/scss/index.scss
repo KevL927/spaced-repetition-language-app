@@ -13,7 +13,6 @@ body {
     background-attachment: fixed;
     background-position: bottom; 
     text-align: center;
-    position: relative
 }
 
 #title, #subtitle {
@@ -60,9 +59,45 @@ body {
     }
 }
 
-#current-question {
+#quiz-card {
+    margin-top: 100px;
+}
+
+#question {
+    padding: 10px;
     background-color: #afb9c9;
-    // opacity: 0.5;
+    font-size: 40px;
+}
+
+#input-answer {
+    margin-top: 20px;
+    width: 200px;
+    height: 30px;
+    font-size: 28px;
+    text-align: center;
+}
+
+#submit-button {
+    margin-left: 4px;
+    width: 50px;
+    height: 24px;
+    color: white;
+    background-color: #4268f4;
+}
+
+#question-form {
+        display: inline-block;
+    text-align: center;
+}
+
+#score {
+    margin-top: 20px;
+    padding: 2px;
+    background-color: white;
+}
+
+#result {
+    margin-top: 2px;
 }
 
 .filler {
@@ -84,4 +119,4 @@ body {
 
 .start-button {
     font-size: 22px;
-}  
+}
