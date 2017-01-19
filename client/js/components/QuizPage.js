@@ -43,7 +43,7 @@ class Quiz extends Component {
         }
         return (
             <div>
-                <Question question={this.props.currentQuestion}/>
+                <Question id="current-question" question={this.props.currentQuestion} />
                 <form onSubmit={this.checkAnswer.bind(this)}>
                     <input type="text" name="answer" ref="userInput" onChange={this.detectTextInput.bind(this)} autoFocus={true}></input>
                     <input className='button' type="submit" name="submit" disabled={!this.props.currentUserInput}></input>
@@ -55,6 +55,8 @@ class Quiz extends Component {
     render() {
         return (
             <div className="quiz-card">
+                <p id="title">French-X</p><br/>
+                <a className="link sign-out" href="#" onClick={this.logout}><i className="fa fa-sign-out fa-1x" aria-hidden="true"></i>Logout</a><br/>
                 {this.renderQuestionOrResult()}
                 <Result result={this.props.result} />
                 <Count result={this.props.result} />
