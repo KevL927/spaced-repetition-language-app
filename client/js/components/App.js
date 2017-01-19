@@ -23,8 +23,8 @@ class App extends Component {
         return (
             <div>
                 <h2>Welcome, {this.props.currentUserName.toUpperCase()}!</h2>
-                <a href="#" onClick={this.logout}>Logout</a><br/>
-                <Link to = "/quiz">Ready to French it up?</Link>
+                <a className="link sign-out" href="#" onClick={this.logout.bind(this)}><i className="fa fa-sign-out fa-1x" aria-hidden="true"></i>Logout</a><br/>
+                <Link to = "/quiz" className="link start-button">Start French'en Now!</Link>
             </div>
         );
     }
