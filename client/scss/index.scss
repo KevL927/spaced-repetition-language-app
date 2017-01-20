@@ -85,15 +85,15 @@ body {
 }
 
 #feedback {
-    position: relative;
-    padding: 10px;
-    font-size: 32px;
-    
     p:nth-child(1) {
         margin-top: 0;
+        font-size: 22px;
     }
     p:nth-child(2) {
         background-color: #ECA191;
+        font-size: 24px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
     
 }
