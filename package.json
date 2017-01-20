@@ -1,7 +1,7 @@
 {
   "name": "French-X",
   "version": "0.0.1",
-  "description": "Learn French using space algorithm",
+  "description": "Learn French using spaced algorithm",
   "main": "index.js",
   "main:server": "server/index.js",
   "main:client": "client/js/index.js",
