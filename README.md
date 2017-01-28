@@ -19,3 +19,10 @@ React, Redux
 ####Backend Technologies:
 
 Node.js, Express, MongoDB, Passport, Google OAuth
+
+#To Run Application
+In your terminal:
+```
+npm run build
+npm run dev
+```
