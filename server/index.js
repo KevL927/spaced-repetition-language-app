@@ -6,9 +6,7 @@ import passport from 'passport';
 import googleRoute from './endpoints/google_oauth';
 import questionRoute from './endpoints/question_route';
 
-
 const app = express();
-
 const HOST = process.env.HOST;
 const PORT = process.env.PORT || 8080;
 mongoose.Promise = global.Promise;
